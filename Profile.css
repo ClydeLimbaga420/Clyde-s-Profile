@@ -1,0 +1,524 @@
+:root {
+    --base-color: rgb(209, 196, 196);
+    --text-color: black;
+    --border-color: black;
+    --accent-color: #007bff; 
+    --hover-bg: rgba(0, 0, 0, 0.05);
+}
+
+
+.darkmode {
+    --base-color: rgb(41, 37, 37);
+    --text-color: white;
+    --border-color: white;
+    --accent-color: #55aaff; 
+    --hover-bg: rgba(255, 255, 255, 0.08);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+
+body {
+    
+    font-family: 'Poppins', sans-serif; 
+    background-color: var(--base-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    padding: 100px;
+}
+
+header.choose {
+    position: sticky;
+    top: 10;
+    z-index: 1000;
+    margin: -20px -20px;
+    width: calc(100% + 40px);
+    
+    background-color: var(--base-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border-radius: 60px;
+}
+
+
+
+h1 { font-weight: 700; }
+h3, h4 { font-weight: 400; }
+.about { font-weight: 600; } 
+
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.profborder {
+    text-align: center;
+}
+
+.profile, .personal, .acclinks, .prog, .education, .accomplishments, .likes {
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+.profile:hover, .personal:hover, .acclinks:hover, .prog:hover, .education:hover, .accomplishments:hover, .likes:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.darkmode .profile:hover, .darkmode .personal:hover, .darkmode .acclinks:hover, .darkmode .prog:hover, .darkmode .education:hover, .darkmode .accomplishments:hover, .darkmode .likes:hover {
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+
+.acclinks ul li{
+    list-style: none;
+}
+
+.profile {
+    font-size: 1.5rem;
+}
+
+.bio {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+img#profiledark {
+    width: 300px;
+    border-radius: 60px;
+    float: right;
+    border: 5px solid var(--border-color);
+    margin-left: 30px;
+    transition: filter 0.5s ease, opacity 0.5s ease, transform 0.1s linear, box-shadow 0.4s ease-in-out;
+}
+
+.personal {
+    margin-top: 20px;
+}
+
+.personal h4 {
+    margin: 10px 0;
+    line-height: 1.6;
+    display: flex;
+    gap: 15px;
+    align-items: baseline;
+    padding: 3px 0;
+    border-bottom: 1px dashed rgba(var(--text-color), 0.1);
+}
+
+.personal h4 b {
+    font-weight: 600;
+    flex-basis: 150px;
+    flex-shrink: 0;
+}
+
+.personal h4:last-child {
+    border-bottom: none;
+}
+
+
+.side-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px; 
+    margin: 40px auto; 
+    flex-wrap: wrap; 
+    width: 90%;
+    max-width: 1200px;
+}
+
+
+
+.about {
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+}
+
+header{
+    border: 2px solid;
+    border-radius: 60px;
+    display: grid;
+    padding: 20px 20px;
+    align-items: center;
+}
+
+.choose ul{
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    font-size: 25px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.choose ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: inline-block;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+
+
+.prog h3 {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 5px 0;
+    transition: background-color 0.3s, padding 0.3s;
+}
+
+.prog h3::after {
+    content: '';
+    position:absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: var(--accent-color);
+    opacity: 0.2;
+    z-index: -2;
+    transition: width 0.8s ease-out;
+}
+
+.prog h3.lang-c:hover::after {
+    width: 80%;
+}
+.prog h3.lang-java:hover::after {
+    width: 70%;
+}
+.prog h3.lang-mysql:hover::after {
+    width: 50%;
+}
+
+.prog h3 span {
+    position: relative;
+    z-index: 1;
+}
+
+.prog h3::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+
+.prog h3:hover {
+    background-color: var(--hover-bg); 
+    padding-left: 10px;
+    border-radius: 5px;
+    cursor: default;
+}
+.prog h3:hover::before {
+    transform: scale(1.5); 
+}
+
+.education h4, .accomplishments h4 {
+    position: relative;
+    padding-left: 30px;
+    margin: 15px 0;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+.education h4::before, .accomplishments h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: gray;
+    border: 3px solid var(--base-color);
+    box-shadow: 0 0 0 2px gray;
+}
+
+.education h4:not(:last-child)::after, .accomplishments h4:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    bottom: -15px;
+    width: 2px;
+    background-color: gray;
+    z-index: -1;
+}
+.likes ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.likes ul li h4 {
+    font-weight: 600;
+    margin: 15px 0 5px 0;
+    padding: 5px 10px;
+    border-left: 4px solid var(--accent-color);
+    background-color: var(--hover-bg);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-left-color 0.3s ease;
+}
+
+.likes h4:not(ul li h4) {
+    margin-left: 20px;
+    padding: 5px 0;
+    color: var(--text-color);
+}
+
+.contact-form{
+    display: grid;
+    place-items: center;
+    border: 3px solid var(--border-color);
+    border-radius: 90px;
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+.contact{
+    place-items: center;
+    display: grid;
+}
+
+
+#first-name, #middle-name, #last-name, #email, #message {
+    border-radius: 90px;
+    padding: 10px 20px;
+    border: 3px solid var(--border-color);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    width: 100%; 
+    max-width: 400px;
+    box-sizing: border-box;
+}
+#message {
+    border-radius: 20px;
+    padding: 10px 50px;
+    min-width: 300px; 
+}
+
+@keyframes jiggle {
+    0% { transform: scale(1); }
+    30% { transform: scale(0.95); } 
+    70% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+
+.jiggle-animation {
+    animation: jiggle 0.4s ease-in-out;
+}
+
+
+#button {
+    background-color: var(--text-color);
+    color: var(--base-color);
+    padding: 15px 20px;
+    border-radius: 80px;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+#button:hover {
+    transform: translateY(-5px);
+    background-color: var(--border-color);
+    color: var(--base-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.darkmode #button:hover {
+    background-color: var(--text-color);
+    color: var(--base-color);
+}
+
+.buttonloc {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+
+.acclinks a {
+    color: var(--text-color);
+    text-decoration: none; 
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    padding-bottom: 5px; 
+}
+
+.acclinks a:hover {
+    transform: translateX(5px);
+    color: var(--accent-color);
+}
+
+
+.acclinks a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease-out;
+}
+.acclinks a:hover::after {
+    width: 100%;
+}
+
+
+
+.choose ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--text-color);
+    transition: width 0.3s ease-out;
+}
+
+.choose ul li a:hover{
+    transform: translateY(-2px);
+}
+
+.choose ul li a:hover::after {
+    width: 100%;
+}
+
+
+img#profiledark:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+.darkmode img#profiledark:hover {
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
+}
+
+#first-name:focus, #middle-name:focus, #last-name:focus, #email:focus, #message:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+} 
+
+#send{
+    display: grid;
+    place-items: center;
+    border-radius: 80px;
+    padding:10px 20px;
+    border: 3px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.hidden-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.hidden-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+@media (max-width: 1024px) {
+    
+    .choose ul {
+        flex-wrap: wrap;
+        gap: 20px;
+        font-size: 20px;
+    }
+    
+    img#profiledark {
+        width: 80%;
+        max-width: 300px;
+        float: none;
+        margin: 20px auto;
+        display: block;
+    }
+
+    .personal, .profborder, .bio, .acclinks, .prog, .education, .accomplishments, .likes {
+        display: block;
+        width: 90%;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .side-info {
+        flex-direction: column; 
+        align-items: center;
+    }
+    
+    #button, #first-name, #middle-name, #last-name, #email, #message, #send {
+        width: 90%;
+        max-width: 400px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+    h3 {
+        font-size: 1.2rem;
+    }
+    h4 {
+        font-size: 1rem;
+    }
+    .about {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    
+    .choose ul {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+    h3 {
+        font-size: 1rem;
+    }
+    h4 {
+        font-size: 0.9rem;
+    }
+
+    #message {
+        padding: 10px 20px;
+    }
+
+    #profiledark {
+        width: 100%;
+    }
+    
+    .personal, .acclinks, .prog, .contact-form {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clyde Limbaga's Profile</title>
+    <link rel = "icon" href = "Logo.png">
+    <link rel="stylesheet" href="Profile.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=id_card" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="Profile.js" defer></script>
+    <script src = "https://cdn.emailjs.com/dist/email.min.js"></script> 
+</head>
+
+<body>
+    <header class = "choose">
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#accounts">Accounts</a></li>
+            <li><a href="#contact-form">Contact Clyde </a></li>
+            <li><a href = "#accomplishments">Accomplishments</a></li>
+        </ul>
+    </header>
+    
+    <br>
+    <div class="buttonloc">
+        <button id="button" onclick="toggleDarkMode()">Press Me!</button>
+    </div>
+
+    <div class="profborder">
+        <div class="profile">
+            <h1>Clyde's Personal Profile</h1>
+        </div>
+    </div>
+
+    <div class="bio">
+        <h3>Currently a 2nd Year BSIT Student that Enjoys Gaming.</h3>
+    </div>
+
+    <br>
+    <img id="profiledark" src="Profile.jpg">
+
+    <div class="personal hidden-section" id = "about">
+        <h5 class = "about">About Me</h5>
+        <h4><b>Name:</b> Clyde Beloira Limbaga</h4> <h4><b>Age:</b> 19</h4>
+        <h4><b>Address:</b> Poblacion Dos, Malabuyoc, Cebu, Visayas, Philippines</h4>
+        <h4><b>Email Address:</b> clydes0218@gmail.com</h4>
+        <h4><b>Backup Address:</b> limbagaclyde99@gmail.com</h4>
+        <h4><b>Contact Information:</b> +63 905 7705 375 / +63 920 8757 608</h4>
+        <h4><b>Languages Spoken:</b> English, Filipino</h4>
+        <h4><b>Birthday:</b> February 18, 2006</h4>
+    </div>
+    <br><br>
+
+    <div class="education hidden-section">
+        <h1><b>Education</b></h1>
+        <h4><b>Kindergarten: </b>St. Peter Academy of Alegria Incorporated Kindergaten Town Center ( SPAAIKTC )</h4>
+        <h4><b>Elementary:</b> Malabuyoc Central Elementary School</h4>
+        <h4><b>Junior High School:</b> Montaneza National High School</h4>
+        <h4><b>Senior High School:</b> Montaneza National High School</h4>
+        <h4><b>Strand Taken:</b> Science Technology Engineering and Mathematics ( STEM )</h4>
+        <h4><b>College:</b> Cebu Technological University Ginatilan Extension Campus</h4>
+        <h4><b>Course Taken:</b> Bachelor of Science in Information Technology ( BSIT )</h4>
+    </div>
+    
+    <div class="accomplishments hidden-section" id = "accomplishments">
+        <h1><b>Accomplishments</b></h1>
+        <h4>Graduated Kindergarten</h4>
+        <h4>Graduated Elementary</h4>
+        <h4>Graduated Junior High School</h4>
+        <h4>Graduated Senior High School</h4>
+    </div>
+    <br><br>
+
+    <div class="likes hidden-section">
+        <h1>Likes:</h1>
+        <ul>
+            <li><h4>Animes</h4></li> <h4>Favorite Anime: One Piece</h4> <li><h4>Mobile Games</h4></li>
+            <h4>Favorite Games: Supercell Games</h4>
+            
+            <li><h4>Pokemon Games</h4></li>
+            <h4>Favorite Pokemon Game: Pokemon Black 2 & White 2</h4>
+            <h4>Favorite Pokemon: Reshiram</h4>
+            
+            <li><h4>Eating</h4></li>
+            <h4>Favorite Food: Spaghetti</h4>
+            
+            <li><h4>Sleeping</h4></li>
+        </ul>
+    </div>
+    <br><br>
+
+    <div class="side-info">
+        <div class = "prog hidden-section">
+            <h1>Programming Languages: </h1>
+            
+            <h3 class="lang-c"><span>C</span></h3> 
+            <h3 class="lang-java"><span>JAVA</span></h3>
+            <h3 class="lang-mysql"><span>MYSQL</span></h3>
+        </div>
+        
+        <div class="profacc">
+            <div class="acclinks hidden-section">
+                <h4 id = accounts >My Different Accounts:</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com/clyde.limbaga.2025">My Facebook</a></li><br>
+                    <li><a href="https://www.youtube.com/@Clydesu324">My Youtube</a></li><br>
+                    <li><a href="https://github.com/ClydeLimbaga420">My Github</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <h1 class = "contact" id = "contact-form">Write Message To Clyde</h1>
+    <div class = "contact-form hidden-section">
+        <br>
+        <form id ="contact">
+            <label for = "message">Message: </label>
+            <br><br>
+            <textarea placeholder = "Write your Message -Name of Sender" id = "message" name = "message" rows = "10" required></textarea>
+            <br><br>
+            <button id = "send" type = "submit">Send</button>
+            <br><br>
+        </form>
+    </div>
+    
+
+</body>
+</html>
