@@ -3,130 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clyde Limbaga's Profile</title>
-    <link rel = "icon" href = "Logo.png">
-    <link rel="stylesheet" href="Profile.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=id_card" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="Profile.js" defer></script>
-    <script src = "https://cdn.emailjs.com/dist/email.min.js"></script> 
+    <title>Clyde Limbaga</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <link rel="icon" href="Logo.png">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-color: #2d3436;
+            --accent-color: #ff4757; 
+            --secondary-accent: #00d2ff; 
+            --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        .darkmode {
+            --bg-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-bg: rgba(20, 20, 25, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-color: #dfe6e9;
+            --accent-color: #00d2ff; 
+            --secondary-accent: #ff4757; 
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-color);
+            transition: all 0.5s ease;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header.choose {
+            position: sticky; top: 20px; z-index: 1000;
+            margin: 20px auto; width: 90%; max-width: 900px;
+            background: var(--glass-bg); backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border); border-radius: 50px;
+            padding: 15px; box-shadow: var(--card-shadow);
+        }
+
+        .choose ul { display: flex; justify-content: space-around; list-style: none; }
+        .choose ul li a {
+            text-decoration: none; color: var(--text-color);
+            font-weight: 600; font-size: 0.85rem; transition: 0.3s;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .choose ul li a:hover { color: var(--accent-color); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+        .glass-card {
+            background: var(--glass-bg); backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border); border-radius: 24px;
+            padding: 30px; margin-bottom: 30px; box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        /* --- Updated Simple Works Section --- */
+        .work-list-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .work-list-item:last-child { border-bottom: none; }
+        
+        .work-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .work-link:hover { text-decoration: underline; }
+        .work-desc { font-size: 0.95rem; opacity: 0.9; }
+
+        /* --- Core UI --- */
+        .hero-section { text-align: center; padding: 40px 0; }
+        #profiledark {
+            width: 180px; height: 180px; border-radius: 50%;
+            object-fit: cover; border: 5px solid var(--accent-color);
+            box-shadow: 0 0 20px var(--accent-color); margin-bottom: 20px;
+        }
+
+        .skill-bar { background: rgba(0,0,0,0.1); height: 10px; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+        .skill-per { height: 100%; background: var(--accent-color); width: 0; transition: width 1.5s ease; }
+        
+        .social-links { display: flex; gap: 20px; justify-content: center; font-size: 2rem; }
+        .social-links a { color: var(--text-color); transition: 0.3s; }
+        .social-links a:hover { color: var(--accent-color); transform: scale(1.2); }
+
+        .hidden-section { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .is-visible { opacity: 1; transform: translateY(0); }
+
+        #button {
+            background: var(--accent-color); color: white; border: none;
+            padding: 10px 25px; border-radius: 50px; cursor: pointer;
+            font-weight: bold; transition: 0.3s;
+        }
+
+        textarea { width: 100%; padding: 15px; border-radius: 15px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.1); color: var(--text-color); }
+        #send { margin-top: 15px; width: 100%; padding: 15px; border-radius: 15px; background: var(--accent-color); color: white; border: none; font-weight: bold; cursor: pointer; }
+    </style>
 </head>
 
 <body>
-    <header class = "choose">
+    <header class="choose">
         <ul>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#accounts">Accounts</a></li>
-            <li><a href="#contact-form">Contact Clyde </a></li>
-            <li><a href = "#accomplishments">Accomplishments</a></li>
+            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="#my-works"><i class="fas fa-laptop-code"></i> Works</a></li>
+            <li><a href="#education"><i class="fas fa-graduation-cap"></i> Bio</a></li>
+            <li><a href="#accounts"><i class="fas fa-link"></i> Socials</a></li>
+            <li><a href="#contact-form"><i class="fas fa-paper-plane"></i> Contact</a></li>
         </ul>
     </header>
-    
-    <br>
-    <div class="buttonloc">
-        <button id="button" onclick="toggleDarkMode()">Press Me!</button>
-    </div>
 
-    <div class="profborder">
-        <div class="profile">
-            <h1>Clyde's Personal Profile</h1>
+    <div class="container">
+        <div class="buttonloc" style="text-align: center; margin-bottom: 20px;">
+            <button id="button" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> Press Me Po</button>
         </div>
-    </div>
 
-    <div class="bio">
-        <h3>Currently a 2nd Year BSIT Student that Enjoys Gaming.</h3>
-    </div>
+        <section class="hero-section">
+            <img id="profiledark" src="Profile.jpg" alt="Profile">
+            <h1>Clyde Beloira Limbaga</h1>
+            <p>Currently a 2nd Year BSIT Student That likes Gaming.</p>
+        </section>
 
-    <br>
-    <img id="profiledark" src="Profile.jpg">
-
-    <div class="personal hidden-section" id = "about">
-        <h5 class = "about">About Me</h5>
-        <h4><b>Name:</b> Clyde Beloira Limbaga</h4> <h4><b>Age:</b> 19</h4>
-        <h4><b>Address:</b> Poblacion Dos, Malabuyoc, Cebu, Visayas, Philippines</h4>
-        <h4><b>Email Address:</b> clydes0218@gmail.com</h4>
-        <h4><b>Backup Address:</b> limbagaclyde99@gmail.com</h4>
-        <h4><b>Contact Information:</b> +63 905 7705 375 / +63 920 8757 608</h4>
-        <h4><b>Languages Spoken:</b> English, Filipino</h4>
-        <h4><b>Birthday:</b> February 18, 2006</h4>
-    </div>
-    <br><br>
-
-    <div class="education hidden-section">
-        <h1><b>Education</b></h1>
-        <h4><b>Kindergarten: </b>St. Peter Academy of Alegria Incorporated Kindergaten Town Center ( SPAAIKTC )</h4>
-        <h4><b>Elementary:</b> Malabuyoc Central Elementary School</h4>
-        <h4><b>Junior High School:</b> Montaneza National High School</h4>
-        <h4><b>Senior High School:</b> Montaneza National High School</h4>
-        <h4><b>Strand Taken:</b> Science Technology Engineering and Mathematics ( STEM )</h4>
-        <h4><b>College:</b> Cebu Technological University Ginatilan Extension Campus</h4>
-        <h4><b>Course Taken:</b> Bachelor of Science in Information Technology ( BSIT )</h4>
-    </div>
-    
-    <div class="accomplishments hidden-section" id = "accomplishments">
-        <h1><b>Accomplishments</b></h1>
-        <h4>Graduated Kindergarten</h4>
-        <h4>Graduated Elementary</h4>
-        <h4>Graduated Junior High School</h4>
-        <h4>Graduated Senior High School</h4>
-    </div>
-    <br><br>
-
-    <div class="likes hidden-section">
-        <h1>Likes:</h1>
-        <ul>
-            <li><h4>Animes</h4></li> <h4>Favorite Anime: One Piece</h4> <li><h4>Mobile Games</h4></li>
-            <h4>Favorite Games: Supercell Games</h4>
-            
-            <li><h4>Pokemon Games</h4></li>
-            <h4>Favorite Pokemon Game: Pokemon Black 2 & White 2</h4>
-            <h4>Favorite Pokemon: Reshiram</h4>
-            
-            <li><h4>Eating</h4></li>
-            <h4>Favorite Food: Spaghetti</h4>
-            
-            <li><h4>Sleeping</h4></li>
-        </ul>
-    </div>
-    <br><br>
-
-    <div class="side-info">
-        <div class = "prog hidden-section">
-            <h1>Programming Languages: </h1>
-            
-            <h3 class="lang-c"><span>C</span></h3> 
-            <h3 class="lang-java"><span>JAVA</span></h3>
-            <h3 class="lang-mysql"><span>MYSQL</span></h3>
+        <div class="glass-card hidden-section" id="about">
+            <h2 style="color: var(--accent-color); margin-bottom: 15px;">About Me</h2>
+            <p><i class="fas fa-map-marker-alt"></i> Proper, Poblacion Dos, Malabuyoc, Cebu, Visayas, Philippines</p>
+            <p><i class="fas fa-envelope"></i> clydes0218@gmail.com</p>
+            <p><i class="fas fa-birthday-cake"></i> February 18, 2006 (19 Years Old)</p>
         </div>
-        
-        <div class="profacc">
-            <div class="acclinks hidden-section">
-                <h4 id = accounts >My Different Accounts:</h4>
-                <ul>
-                    <li><a href="https://www.facebook.com/clyde.limbaga.2025">My Facebook</a></li><br>
-                    <li><a href="https://www.youtube.com/@Clydesu324">My Youtube</a></li><br>
-                    <li><a href="https://github.com/ClydeLimbaga420">My Github</a></li>
-                </ul>
+
+        <div class="glass-card hidden-section" id="my-works">
+            <h2 style="color: var(--accent-color); margin-bottom: 20px;">My Works</h2>
+            
+            <div class="work-list-item">
+                <a href="https://sugo.page.gd/" class="work-link" target="_blank">SUGO System</a>
+                <p class="work-desc">A System Where You Can Request Help In Your Selected Place.</p>
+            </div>
+
+        </div>
+
+        <div class="glass-card hidden-section" id="education">
+            <h2 style="color: var(--accent-color); margin-bottom: 15px;">Education</h2>
+            <p><strong>Cebu Technological University</strong> - BSIT (Current)</p>
+            <p><strong>Montaneza National High School</strong> - STEM (Graduated)</p>
+            <p><strong>Malabuyoc Central School</strong> - (Graduated)</p>
+        </div>
+
+        <div class="glass-card hidden-section">
+            <h2 style="color: var(--accent-color); margin-bottom: 15px;">Programming Languages</h2>
+            <p>JAVA</p>
+            <div class="skill-bar"><div class="skill-per" style="width: 75%;"></div></div>
+            <p>C</p>
+            <div class="skill-bar"><div class="skill-per" style="width: 80%;"></div></div>
+            <p>MySQL</p>
+            <div class="skill-bar"><div class="skill-per" style="width: 65%;"></div></div>
+            <p>PHP</p>
+            <div class="skill-bar"><div class="skill-per" style="width: 35%;"></div></div>
+        </div>
+
+        <div class="glass-card hidden-section" id="accounts">
+            <h2 style="text-align: center; margin-bottom: 20px;">My Socials</h2>
+            <div class="social-links">
+                <a href="https://www.facebook.com/clyde.limbaga.2025" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://github.com/ClydeLimbaga420" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.youtube.com/@Clydesu324" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
-    </div>
-    <br><br>
 
-    <h1 class = "contact" id = "contact-form">Write Message To Clyde</h1>
-    <div class = "contact-form hidden-section">
-        <br>
-        <form id ="contact">
-            <label for = "message">Message: </label>
-            <br><br>
-            <textarea placeholder = "Write your Message -Name of Sender" id = "message" name = "message" rows = "10" required></textarea>
-            <br><br>
-            <button id = "send" type = "submit">Send</button>
-            <br><br>
-        </form>
+        <div class="glass-card hidden-section" id="contact-form">
+            <h2 style="margin-bottom: 15px;">Write a Message</h2>
+            <form id="contact">
+                <textarea placeholder="Write your message here..." id="message" name="message" rows="5" required></textarea>
+                <button id="send" type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
     </div>
-    
 
+    <script>
+        function toggleDarkMode() {
+        const isDark = document.body.classList.toggle('darkmode');
+        const btn = document.getElementById('button');
+        const profileImg = document.getElementById('profiledark');
+
+        btn.innerHTML = isDark
+            ? '<i class="fas fa-sun"></i> Light Mode'
+            : '<i class="fas fa-moon"></i> Dark Mode';
+
+        profileImg.src = isDark ? 'ProfileButDark.jpg' : 'Profile.jpg';
+
+        localStorage.setItem('darkmode', isDark);
+    }
+
+    window.onload = function () {
+        const isDark = localStorage.getItem('darkmode') === 'true';
+        const profileImg = document.getElementById('profiledark');
+
+        if (isDark) {
+            document.body.classList.add('darkmode');
+            profileImg.src = 'Profile-dark.jpg';
+        }
+    };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.hidden-section').forEach(el => observer.observe(el));
+
+        emailjs.init('km6Tyg98f7Puogtzw');
+        document.getElementById('contact').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('send');
+            btn.innerText = "Sending...";
+            emailjs.sendForm('service_nzw6rqb', 'template_3qoho3c', this)
+                .then(() => {
+                    alert('Message Sent!');
+                    this.reset();
+                    btn.innerText = "Send Message";
+                }, () => {
+                    alert('Failed to send.');
+                    btn.innerText = "Send Message";
+                });
+        });
+    </script>
 </body>
 </html>
