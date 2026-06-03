@@ -140,7 +140,8 @@
             <h2 style="color: var(--accent-color); margin-bottom: 15px;">About Me</h2>
             <p><i class="fas fa-map-marker-alt"></i> Proper, Poblacion Dos, Malabuyoc, Cebu, Visayas, Philippines</p>
             <p><i class="fas fa-envelope"></i> clydes0218@gmail.com</p>
-            <p><i class="fas fa-birthday-cake"></i> February 18, 2006 (19 Years Old)</p>
+            <p><i class="fas fa-birthday-cake"></i> February 18, 2006 (<span id="age"></span> Years Old)</p>
+            <p id="birthday-countdown"></p>
         </div>
 
         <div class="glass-card hidden-section" id="my-works">
@@ -149,7 +150,11 @@
             <div class="work-list-item">
                 <a href="https://sugo.page.gd/" class="work-link" target="_blank">SUGO System</a>
                 <p class="work-desc">A System Where You Can Request Help In Your Selected Place.</p>
+                <a href="https://animeforu.site.je" target="_blank">Anime For U</a>
+                <p class="work-desc">A Simple Anime Watchlist for Anime Fans.</p>
             </div>
+
+           
 
         </div>
 
@@ -191,7 +196,7 @@
     </div>
 
     <script>
-        function toggleDarkMode() {
+    function toggleDarkMode() {
         const isDark = document.body.classList.toggle('darkmode');
         const btn = document.getElementById('button');
         const profileImg = document.getElementById('profiledark');
@@ -211,35 +216,111 @@
 
         if (isDark) {
             document.body.classList.add('darkmode');
-            profileImg.src = 'Profile-dark.jpg';
+            profileImg.src = 'ProfileButDark.jpg';
         }
+
+        calculateAge();
+        updateBirthdayCountdown();
     };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.hidden-section').forEach(el => observer.observe(el));
-
-        emailjs.init('km6Tyg98f7Puogtzw');
-        document.getElementById('contact').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const btn = document.getElementById('send');
-            btn.innerText = "Sending...";
-            emailjs.sendForm('service_nzw6rqb', 'template_3qoho3c', this)
-                .then(() => {
-                    alert('Message Sent!');
-                    this.reset();
-                    btn.innerText = "Send Message";
-                }, () => {
-                    alert('Failed to send.');
-                    btn.innerText = "Send Message";
-                });
+    // Scroll animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
         });
-    </script>
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.hidden-section').forEach(el => observer.observe(el));
+
+    // EmailJS
+    emailjs.init('km6Tyg98f7Puogtzw');
+    document.getElementById('contact').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const btn = document.getElementById('send');
+        btn.innerText = "Sending...";
+        emailjs.sendForm('service_nzw6rqb', 'template_3qoho3c', this)
+            .then(() => {
+                alert('Message Sent!');
+                this.reset();
+                btn.innerText = "Send Message";
+            }, () => {
+                alert('Failed to send.');
+                btn.innerText = "Send Message";
+            });
+    });
+
+    // ✅ AGE CALCULATION
+    function calculateAge() {
+        const birthDate = new Date("2006-02-18");
+        const today = new Date();
+
+        let age = today.getFullYear() - birthDate.getFullYear();
+
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+
+        document.getElementById("age").textContent = age;
+    }
+
+    // 🎉 CONFETTI FUNCTION
+    function launchConfetti() {
+        for (let i = 0; i < 100; i++) {
+            const confetti = document.createElement("div");
+            confetti.style.position = "fixed";
+            confetti.style.width = "8px";
+            confetti.style.height = "8px";
+            confetti.style.background = `hsl(${Math.random()*360},100%,50%)`;
+            confetti.style.top = "-10px";
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.opacity = 0.8;
+            confetti.style.zIndex = 9999;
+            confetti.style.borderRadius = "50%";
+            document.body.appendChild(confetti);
+
+            let fall = setInterval(() => {
+                confetti.style.top = (confetti.offsetTop + 5) + "px";
+                if (confetti.offsetTop > window.innerHeight) {
+                    confetti.remove();
+                    clearInterval(fall);
+                }
+            }, 20);
+        }
+    }
+
+    // 🎂 COUNTDOWN
+    function updateBirthdayCountdown() {
+        const today = new Date();
+        let nextBirthday = new Date(today.getFullYear(), 1, 18);
+
+        if (today > nextBirthday) {
+            nextBirthday = new Date(today.getFullYear() + 1, 1, 18);
+        }
+
+        const diff = nextBirthday - today;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        let countdownText;
+
+        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+            countdownText = "🎉 It's my birthday today! 🎂";
+            launchConfetti();
+        } else {
+            countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s until my birthday 🎂`;
+        }
+
+        document.getElementById("birthday-countdown").textContent = countdownText;
+    }
+
+    setInterval(updateBirthdayCountdown, 1000);
+</script>
 </body>
 </html>
