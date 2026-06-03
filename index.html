@@ -1,326 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clyde Limbaga</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <link rel="icon" href="Logo.png">
-    <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.3);
-            --text-color: #2d3436;
-            --accent-color: #ff4757; 
-            --secondary-accent: #00d2ff; 
-            --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-        }
-
-        .darkmode {
-            --bg-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            --glass-bg: rgba(20, 20, 25, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-color: #dfe6e9;
-            --accent-color: #00d2ff; 
-            --secondary-accent: #ff4757; 
-            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg-gradient);
-            background-attachment: fixed;
-            color: var(--text-color);
-            transition: all 0.5s ease;
-            line-height: 1.6;
-            padding-bottom: 50px;
-        }
-
-        header.choose {
-            position: sticky; top: 20px; z-index: 1000;
-            margin: 20px auto; width: 90%; max-width: 900px;
-            background: var(--glass-bg); backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border); border-radius: 50px;
-            padding: 15px; box-shadow: var(--card-shadow);
-        }
-
-        .choose ul { display: flex; justify-content: space-around; list-style: none; }
-        .choose ul li a {
-            text-decoration: none; color: var(--text-color);
-            font-weight: 600; font-size: 0.85rem; transition: 0.3s;
-            display: flex; align-items: center; gap: 5px;
-        }
-        .choose ul li a:hover { color: var(--accent-color); }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
-
-        .glass-card {
-            background: var(--glass-bg); backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border); border-radius: 24px;
-            padding: 30px; margin-bottom: 30px; box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease;
-        }
-
-        /* --- Updated Simple Works Section --- */
-        .work-list-item {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .work-list-item:last-child { border-bottom: none; }
-        
-        .work-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            display: inline-block;
-            margin-bottom: 5px;
-        }
-        .work-link:hover { text-decoration: underline; }
-        .work-desc { font-size: 0.95rem; opacity: 0.9; }
-
-        /* --- Core UI --- */
-        .hero-section { text-align: center; padding: 40px 0; }
-        #profiledark {
-            width: 180px; height: 180px; border-radius: 50%;
-            object-fit: cover; border: 5px solid var(--accent-color);
-            box-shadow: 0 0 20px var(--accent-color); margin-bottom: 20px;
-        }
-
-        .skill-bar { background: rgba(0,0,0,0.1); height: 10px; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
-        .skill-per { height: 100%; background: var(--accent-color); width: 0; transition: width 1.5s ease; }
-        
-        .social-links { display: flex; gap: 20px; justify-content: center; font-size: 2rem; }
-        .social-links a { color: var(--text-color); transition: 0.3s; }
-        .social-links a:hover { color: var(--accent-color); transform: scale(1.2); }
-
-        .hidden-section { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .is-visible { opacity: 1; transform: translateY(0); }
-
-        #button {
-            background: var(--accent-color); color: white; border: none;
-            padding: 10px 25px; border-radius: 50px; cursor: pointer;
-            font-weight: bold; transition: 0.3s;
-        }
-
-        textarea { width: 100%; padding: 15px; border-radius: 15px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.1); color: var(--text-color); }
-        #send { margin-top: 15px; width: 100%; padding: 15px; border-radius: 15px; background: var(--accent-color); color: white; border: none; font-weight: bold; cursor: pointer; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime Watchlist</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="icons/monster.png" type="image/png" />
 </head>
-
 <body>
-    <header class="choose">
-        <ul>
-            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="#my-works"><i class="fas fa-laptop-code"></i> Works</a></li>
-            <li><a href="#education"><i class="fas fa-graduation-cap"></i> Bio</a></li>
-            <li><a href="#accounts"><i class="fas fa-link"></i> Socials</a></li>
-            <li><a href="#contact-form"><i class="fas fa-paper-plane"></i> Contact</a></li>
-        </ul>
-    </header>
 
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
     <div class="container">
-        <div class="buttonloc" style="text-align: center; margin-bottom: 20px;">
-            <button id="button" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> Press Me Po</button>
+      <h1 class="logo">
+            <img src="icons/monster.png" alt="Logo" class="logo-img">
+            Anime For U
+        </h1>
+      <div class="header-stats">
+        <span id="stat-watching">0 Watching</span>
+        <span id="stat-completed">0 Completed</span>
+        <span id="stat-planned">0 Plan to Watch</span>
+      </div>
+      <div class="header-auth">
+        <!-- Shown when logged OUT -->
+        <button id="login-btn" class="btn-login">&#128100; Login</button>
+        <!-- Shown when logged IN (hidden by default) -->
+        <div id="user-info" class="user-info hidden">
+          <span id="user-avatar" class="user-avatar">&#128100;</span>
+          <span id="user-name" class="user-name"></span>
+          <button id="logout-btn" class="btn-logout">Logout</button>
         </div>
+      </div>
+    </div>
+  </header>
 
-        <section class="hero-section">
-            <img id="profiledark" src="Profile.jpg" alt="Profile">
-            <h1>Clyde Beloira Limbaga</h1>
-            <p>Currently a 2nd Year BSIT Student That likes Gaming.</p>
-        </section>
+  <!-- ===== CONTROLS BAR ===== -->
+  <section class="controls">
+    <div class="container controls-inner">
 
-        <div class="glass-card hidden-section" id="about">
-            <h2 style="color: var(--accent-color); margin-bottom: 15px;">About Me</h2>
-            <p><i class="fas fa-map-marker-alt"></i> Proper, Poblacion Dos, Malabuyoc, Cebu, Visayas, Philippines</p>
-            <p><i class="fas fa-envelope"></i> clydes0218@gmail.com</p>
-            <p><i class="fas fa-birthday-cake"></i> February 18, 2006 (<span id="age"></span> Years Old)</p>
-            <p id="birthday-countdown"></p>
-        </div>
+      <!-- Search -->
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search anime..." />
+        <button id="search-btn">Search</button>
+      </div>
 
-        <div class="glass-card hidden-section" id="my-works">
-            <h2 style="color: var(--accent-color); margin-bottom: 20px;">My Works</h2>
-            
-            <div class="work-list-item">
-                <a href="https://sugo.page.gd/" class="work-link" target="_blank">SUGO System</a>
-                <p class="work-desc">A System Where You Can Request Help In Your Selected Place.</p>
-                <a href="https://animeforu.site.je" target="_blank">Anime For U</a>
-                <p class="work-desc">A Simple Anime Watchlist for Anime Fans.</p>
-            </div>
+      <!-- Filters -->
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="watching">Watching</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+        <button class="filter-btn" data-filter="planned">Plan to Watch</button>
+        <button class="filter-btn" data-filter="dropped">Dropped</button>
+      </div>
 
-           
+      <!-- Season selector -->
+      <div class="season-select">
+        <select id="season-year">
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+          <option value="2023">2023</option>
+        </select>
+        <select id="season-name">
+          <option value="winter">Winter</option>
+          <option value="spring">Spring</option>
+          <option value="summer">Summer</option>
+          <option value="fall">Fall</option>
+        </select>
+        <button id="load-season-btn">Load Season</button>
+      </div>
 
-        </div>
+    </div>
+  </section>
 
-        <div class="glass-card hidden-section" id="education">
-            <h2 style="color: var(--accent-color); margin-bottom: 15px;">Education</h2>
-            <p><strong>Cebu Technological University</strong> - BSIT (Current)</p>
-            <p><strong>Montaneza National High School</strong> - STEM (Graduated)</p>
-            <p><strong>Malabuyoc Central School</strong> - (Graduated)</p>
-        </div>
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="container main-content">
 
-        <div class="glass-card hidden-section">
-            <h2 style="color: var(--accent-color); margin-bottom: 15px;">Programming Languages</h2>
-            <p>JAVA</p>
-            <div class="skill-bar"><div class="skill-per" style="width: 75%;"></div></div>
-            <p>C</p>
-            <div class="skill-bar"><div class="skill-per" style="width: 80%;"></div></div>
-            <p>MySQL</p>
-            <div class="skill-bar"><div class="skill-per" style="width: 65%;"></div></div>
-            <p>PHP</p>
-            <div class="skill-bar"><div class="skill-per" style="width: 35%;"></div></div>
-        </div>
-
-        <div class="glass-card hidden-section" id="accounts">
-            <h2 style="text-align: center; margin-bottom: 20px;">My Socials</h2>
-            <div class="social-links">
-                <a href="https://www.facebook.com/clyde.limbaga.2025" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://github.com/ClydeLimbaga420" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.youtube.com/@Clydesu324" target="_blank"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-
-        <div class="glass-card hidden-section" id="contact-form">
-            <h2 style="margin-bottom: 15px;">Write a Message</h2>
-            <form id="contact">
-                <textarea placeholder="Write your message here..." id="message" name="message" rows="5" required></textarea>
-                <button id="send" type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
-            </form>
-        </div>
+    <!-- Loading spinner -->
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>Fetching anime...</p>
     </div>
 
-    <script>
-    function toggleDarkMode() {
-        const isDark = document.body.classList.toggle('darkmode');
-        const btn = document.getElementById('button');
-        const profileImg = document.getElementById('profiledark');
+    <!-- Error message -->
+    <div id="error-msg" class="error-msg hidden"></div>
 
-        btn.innerHTML = isDark
-            ? '<i class="fas fa-sun"></i> Light Mode'
-            : '<i class="fas fa-moon"></i> Dark Mode';
+    <!-- Anime grid -->
+    <div id="anime-grid" class="anime-grid"></div>
 
-        profileImg.src = isDark ? 'ProfileButDark.jpg' : 'Profile.jpg';
+    <!-- Empty state -->
+    <div id="empty-state" class="empty-state hidden">
+      <p>No anime found. Try a different filter or season.</p>
+    </div>
 
-        localStorage.setItem('darkmode', isDark);
-    }
+  </main>
 
-    window.onload = function () {
-        const isDark = localStorage.getItem('darkmode') === 'true';
-        const profileImg = document.getElementById('profiledark');
+  <!-- ===== ANIME DETAIL MODAL ===== -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-body">
 
-        if (isDark) {
-            document.body.classList.add('darkmode');
-            profileImg.src = 'ProfileButDark.jpg';
-        }
+        <div class="modal-left">
+          <img id="modal-img" src="" alt="" />
+          <div class="modal-score">
+            <span>&#9733;</span>
+            <span id="modal-score-val">-</span>
+          </div>
+        </div>
 
-        calculateAge();
-        updateBirthdayCountdown();
-    };
+        <div class="modal-right">
+          <h2 id="modal-title"></h2>
+          <p id="modal-title-jp" class="modal-subtitle"></p>
 
-    // Scroll animation
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, { threshold: 0.1 });
+          <div class="modal-meta">
+            <span id="modal-type"></span>
+            <span id="modal-episodes"></span>
+            <span id="modal-status"></span>
+            <span id="modal-season"></span>
+          </div>
 
-    document.querySelectorAll('.hidden-section').forEach(el => observer.observe(el));
+          <p id="modal-synopsis" class="modal-synopsis"></p>
 
-    // EmailJS
-    emailjs.init('km6Tyg98f7Puogtzw');
-    document.getElementById('contact').addEventListener('submit', function (e) {
-        e.preventDefault();
-        const btn = document.getElementById('send');
-        btn.innerText = "Sending...";
-        emailjs.sendForm('service_nzw6rqb', 'template_3qoho3c', this)
-            .then(() => {
-                alert('Message Sent!');
-                this.reset();
-                btn.innerText = "Send Message";
-            }, () => {
-                alert('Failed to send.');
-                btn.innerText = "Send Message";
-            });
-    });
+          <div class="modal-genres" id="modal-genres"></div>
 
-    // ✅ AGE CALCULATION
-    function calculateAge() {
-        const birthDate = new Date("2006-02-18");
-        const today = new Date();
+          <!-- Watchlist controls inside modal -->
+          <div class="watchlist-controls">
+            <label for="modal-watch-status">My Status:</label>
+            <select id="modal-watch-status">
+              <option value="">-- Not in list --</option>
+              <option value="watching">Watching</option>
+              <option value="completed">Completed</option>
+              <option value="planned">Plan to Watch</option>
+              <option value="dropped">Dropped</option>
+            </select>
 
-        let age = today.getFullYear() - birthDate.getFullYear();
+            <label for="modal-episode-count">Episodes watched:</label>
+            <div class="ep-counter">
+              <button class="ep-btn" id="ep-minus">&#8722;</button>
+              <input type="number" id="modal-episode-count" min="0" value="0" />
+              <button class="ep-btn" id="ep-plus">&#43;</button>
+            </div>
 
-        const monthDiff = today.getMonth() - birthDate.getMonth();
+            <label for="modal-rating">My Rating (1-10):</label>
+            <input type="number" id="modal-rating" min="1" max="10" placeholder="1-10" />
 
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
+            <button class="btn-save" id="modal-save-btn">Save to Watchlist</button>
+            <button class="btn-remove hidden" id="modal-remove-btn">Remove</button>
+          </div>
 
-        document.getElementById("age").textContent = age;
-    }
+        </div>
+      </div>
+    </div>
+  </div>
 
-    // 🎉 CONFETTI FUNCTION
-    function launchConfetti() {
-        for (let i = 0; i < 100; i++) {
-            const confetti = document.createElement("div");
-            confetti.style.position = "fixed";
-            confetti.style.width = "8px";
-            confetti.style.height = "8px";
-            confetti.style.background = `hsl(${Math.random()*360},100%,50%)`;
-            confetti.style.top = "-10px";
-            confetti.style.left = Math.random() * window.innerWidth + "px";
-            confetti.style.opacity = 0.8;
-            confetti.style.zIndex = 9999;
-            confetti.style.borderRadius = "50%";
-            document.body.appendChild(confetti);
+  <!-- ===== LOGIN / REGISTER MODAL ===== -->
+  <div id="auth-modal-overlay" class="modal-overlay hidden">
+    <div class="modal auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+      <button class="modal-close" id="auth-modal-close" aria-label="Close">&times;</button>
 
-            let fall = setInterval(() => {
-                confetti.style.top = (confetti.offsetTop + 5) + "px";
-                if (confetti.offsetTop > window.innerHeight) {
-                    confetti.remove();
-                    clearInterval(fall);
-                }
-            }, 20);
-        }
-    }
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Login</button>
+        <button class="auth-tab" data-tab="register">Register</button>
+      </div>
 
-    // 🎂 COUNTDOWN
-    function updateBirthdayCountdown() {
-        const today = new Date();
-        let nextBirthday = new Date(today.getFullYear(), 1, 18);
+      <!-- LOGIN FORM -->
+      <div class="auth-form" id="tab-login">
+        <h2 id="auth-modal-title" class="auth-title">Welcome back</h2>
+        <p class="auth-subtitle">Log in to sync your watchlist</p>
 
-        if (today > nextBirthday) {
-            nextBirthday = new Date(today.getFullYear() + 1, 1, 18);
-        }
+        <div id="login-error" class="auth-error hidden"></div>
 
-        const diff = nextBirthday - today;
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" placeholder="you@email.com" autocomplete="email" />
 
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
+        <label for="login-password">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" />
+          <button type="button" class="toggle-pw" data-target="login-password">&#128065;</button>
+        </div>
 
-        let countdownText;
+        <button class="btn-auth-submit" id="login-submit-btn">Login</button>
 
-        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-            countdownText = "🎉 It's my birthday today! 🎂";
-            launchConfetti();
-        } else {
-            countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s until my birthday 🎂`;
-        }
+        <p class="auth-switch">No account? <a href="#" id="go-register">Register here</a></p>
+      </div>
 
-        document.getElementById("birthday-countdown").textContent = countdownText;
-    }
+      <!-- REGISTER FORM -->
+      <div class="auth-form hidden" id="tab-register">
+        <h2 class="auth-title">Create account</h2>
+        <p class="auth-subtitle">Start tracking your anime</p>
 
-    setInterval(updateBirthdayCountdown, 1000);
-</script>
+        <div id="register-error" class="auth-error hidden"></div>
+
+        <label for="reg-username">Username</label>
+        <input type="text" id="reg-username" placeholder="coolweeb123" autocomplete="username" />
+
+        <label for="reg-email">Email</label>
+        <input type="email" id="reg-email" placeholder="you@email.com" autocomplete="email" />
+
+        <label for="reg-password">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="reg-password" placeholder="Min. 8 characters" autocomplete="new-password" />
+          <button type="button" class="toggle-pw" data-target="reg-password">&#128065;</button>
+        </div>
+
+        <label for="reg-password2">Confirm Password</label>
+        <input type="password" id="reg-password2" placeholder="••••••••" autocomplete="new-password" />
+
+        <button class="btn-auth-submit" id="register-submit-btn">Create Account</button>
+
+        <p class="auth-switch">Already have one? <a href="#" id="go-login">Login here</a></p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+        <p>&copy; 2026 Anime Watchlist for Anime Fans. All rights reserved.</p>
+
+        <div class="footer-links">
+        <a href="https://clydesl.netlify.app" target="_blank">Profile</a>
+        <a href="https://github.com/ClydeLimbaga420" target="_blank">GitHub</a>
+        </div>
+    </div>
+    </footer>
+
+  <!-- ===== SCRIPTS (order matters!) ===== -->
+  <script src="js/storage.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+
 </body>
 </html>
