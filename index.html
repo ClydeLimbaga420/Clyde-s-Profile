@@ -113,21 +113,73 @@
         #send { margin-top: 15px; width: 100%; padding: 15px; border-radius: 15px; background: var(--accent-color); color: white; border: none; font-weight: bold; cursor: pointer; }
 
         .music-player {
-            margin-top: 20px;
-            text-align: center;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 10px 14px 10px 10px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            border: 1px solid var(--glass-border);
+            border-radius: 60px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .music-disc {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #222;
+            color: white;
+            border: 3px solid var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .music-disc.playing {
+            animation: spinDisc 3s linear infinite;
+        }
+
+        @keyframes spinDisc {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .music-info {
+            flex: 1;
+            text-align: left;
+            min-width: 0;
+        }
+
+        .music-label {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        .music-title {
+            font-weight: 600;
         }
 
         #musicButton {
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
             background: var(--accent-color);
             color: white;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 50px;
             cursor: pointer;
-        }
-
-        #musicButton:hover {
-            transform: scale(1.05);
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -155,13 +207,22 @@
         </section>
 
         <div class="music-player">
+            <div class="music-disc" id="musicDisc">
+                <i class="fas fa-music"></i>
+            </div>
+
+            <div class="music-info">
+                <span class="music-label">Now Playing</span>
+                <span class="music-title">Sway - Bic Runga</span>
+            </div>
+
+            <button id="musicButton" onclick="toggleMusic()">
+                <i class="fas fa-play"></i>
+            </button>
+
             <audio id="bgMusic" loop>
                 <source src="music.mp3" type="audio/mpeg">
             </audio>
-
-            <button id="musicButton" onclick="toggleMusic()">
-                <i class="fas fa-play"></i> Play Music
-            </button>
         </div>
 
         <br>
@@ -355,14 +416,17 @@
 
     const bgMusic = document.getElementById("bgMusic");
     const musicButton = document.getElementById("musicButton");
+    const musicDisc = document.getElementById("musicDisc");
 
     function toggleMusic() {
         if (bgMusic.paused) {
             bgMusic.play();
-            musicButton.innerHTML = '<i class="fas fa-pause"></i> Pause Music';
+            musicButton.innerHTML = '<i class="fas fa-pause"></i>';
+            musicDisc.classList.add("playing");
         } else {
             bgMusic.pause();
-            musicButton.innerHTML = '<i class="fas fa-play"></i> Play Music';
+            musicButton.innerHTML = '<i class="fas fa-play"></i>';
+            musicDisc.classList.remove("playing");
         }
     }
 </script>
