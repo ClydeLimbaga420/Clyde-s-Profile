@@ -111,6 +111,24 @@
 
         textarea { width: 100%; padding: 15px; border-radius: 15px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.1); color: var(--text-color); }
         #send { margin-top: 15px; width: 100%; padding: 15px; border-radius: 15px; background: var(--accent-color); color: white; border: none; font-weight: bold; cursor: pointer; }
+
+        .music-player {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #musicButton {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        #musicButton:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
@@ -135,6 +153,18 @@
             <h1>Clyde Beloira Limbaga</h1>
             <p>Currently a 3rd Year BSIT Student That likes Gaming.</p>
         </section>
+
+        <div class="music-player">
+            <audio id="bgMusic" loop>
+                <source src="music.mp3" type="audio/mpeg">
+            </audio>
+
+            <button id="musicButton" onclick="toggleMusic()">
+                <i class="fas fa-play"></i> Play Music
+            </button>
+        </div>
+
+        <br>
 
         <div class="glass-card hidden-section" id="about">
             <h2 style="color: var(--accent-color); margin-bottom: 15px;">About Me</h2>
@@ -315,13 +345,26 @@
             countdownText = "🎉 It's my birthday today! 🎂";
             launchConfetti();
         } else {
-            countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s until my birthday 🎂`;
+            countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s until my B-Day 🎂`;
         }
 
         document.getElementById("birthday-countdown").textContent = countdownText;
     }
 
     setInterval(updateBirthdayCountdown, 1000);
+
+    const bgMusic = document.getElementById("bgMusic");
+    const musicButton = document.getElementById("musicButton");
+
+    function toggleMusic() {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            musicButton.innerHTML = '<i class="fas fa-pause"></i> Pause Music';
+        } else {
+            bgMusic.pause();
+            musicButton.innerHTML = '<i class="fas fa-play"></i> Play Music';
+        }
+    }
 </script>
 </body>
 </html>
