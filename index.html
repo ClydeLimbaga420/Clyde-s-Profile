@@ -3,201 +3,905 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clyde Limbaga</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Profile.css">
-    
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+    <title>Clyde Beloira Limbaga | IT Student & Developer</title>
+
+    <meta name="description"
+          content="Clyde Beloira Limbaga — IT student, aspiring software developer.">
+
     <link rel="icon" href="Logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+    <link rel="stylesheet" href="Profile.css">
 </head>
 
 <body>
-    <header class="choose">
-        <ul>
-            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="#my-works"><i class="fas fa-laptop-code"></i> Works</a></li>
-            <li><a href="#education"><i class="fas fa-graduation-cap"></i> Bio</a></li>
-            <li><a href="#learning"><i class="fas fa-book-open"></i> Learning</a></li>
-            <li><a href="#accounts"><i class="fas fa-link"></i> Socials</a></li>
-            <li><a href="#contact-form"><i class="fas fa-paper-plane"></i> Contact</a></li>
-        </ul>
-    </header>
 
-    <div class="container">
-        <div class="buttonloc" style="text-align: center; margin-bottom: 20px;">
-            <button id="button" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> Press Me Po</button>
+
+<header class="navbar">
+
+    <a href="#home" class="logo">
+        <span>C</span>LYDE
+    </a>
+
+    <nav id="navMenu">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#learning">Learning</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+
+        <button id="themeButton"
+                class="icon-button"
+                onclick="toggleDarkMode()"
+                aria-label="Toggle dark mode">
+
+            <i class="fas fa-moon"></i>
+
+        </button>
+
+        <button class="menu-button"
+                onclick="toggleMenu()"
+                aria-label="Open menu">
+
+            <i class="fas fa-bars"></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <p class="eyebrow">
+            <span class="status-dot"></span>
+            Available for opportunities
+        </p>
+
+        <h1>
+            Hi, I'm <span>Clyde Limbaga.</span>
+        </h1>
+
+        <h2>
+            IT Student & Aspiring Software Developer
+        </h2>
+
+        <p class="hero-description">
+            I'm a 3rd-year Information Technology student interested in
+            software development, artificial intelligence, networking,
+            and building practical technology solutions.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#projects" class="primary-button">
+                View My Work
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
+            <a href="#contact" class="secondary-button">
+                Contact Me
+            </a>
+
         </div>
 
-        <section class="hero-section">
-            <img id="profiledark" src="profile.jpg" alt="Profile">
-            <h1>Clyde Beloira Limbaga</h1>
-            <p>Currently a 3rd Year Chill B.S.I.T. Student.</p>
-        </section>
+        <div class="hero-socials">
 
-        <div class="music-player">
-            <div class="music-disc" id="musicDisc">
-                <i class="fas fa-music"></i>
+            <a href="https://github.com/ClydeLimbaga420"
+               target="_blank"
+               aria-label="GitHub">
+
+                <i class="fab fa-github"></i>
+
+            </a>
+
+            <a href="https://www.linkedin.com/in/clyde-limbaga-02190b3b7/"
+               target="_blank"
+               aria-label="LinkedIn">
+
+                <i class="fab fa-linkedin"></i>
+
+            </a>
+
+            <a href="https://www.facebook.com/clyde.limbaga.2025"
+               target="_blank"
+               aria-label="Facebook">
+
+                <i class="fab fa-facebook"></i>
+
+            </a>
+
+            <a href="https://www.instagram.com/clydelimbaga/?hl=en"
+               target="_blank"
+               aria-label="Instagram">
+
+                <i class="fab fa-instagram"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-image-wrapper">
+
+        <div class="image-glow"></div>
+
+        <div class="hero-photo">
+            <img class="profile-photo light-photo" src="./profile.jpg" alt="Clyde Limbaga">
+            <img class="profile-photo dark-photo" src="./ProfileButDark.jpg" alt="Clyde Limbaga">
+        </div>
+
+        <div class="image-badge">
+
+            <i class="fas fa-code"></i>
+
+            <span>Building & Learning</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="about">
+
+    <div class="section-heading">
+
+        <p class="section-label">ABOUT ME</p>
+
+        <h2>Getting to know me</h2>
+
+        <p>
+            A little about who I am, what I do, and what I'm interested in.
+        </p>
+
+    </div>
+
+
+    <div class="about-grid">
+
+        <div class="about-text">
+
+            <p>
+                I'm Clyde Beloira Limbaga, a Bachelor of Science in
+                Information Technology student at Cebu Technological University.
+            </p>
+
+            <p>
+                I'm passionate about technology and enjoy turning ideas
+                into working applications. My interests include software
+                development, artificial intelligence, machine learning,
+                networking, Linux, and database systems.
+            </p>
+
+            <p>
+                I'm continuously learning new technologies and improving
+                my development skills by working on personal and academic
+                projects.
+            </p>
+
+        </div>
+
+
+        <div class="about-details">
+
+            <div class="detail-item">
+
+                <i class="fas fa-location-dot"></i>
+
+                <div>
+                    <small>Location</small>
+                    <p>Malabuyoc, Cebu, Philippines</p>
+                </div>
+
             </div>
 
-            <div class="music-info">
-                <span class="music-label">Now Playing</span>
-                <span class="music-title">Sway - Bic Runga</span>
+
+            <div class="detail-item">
+
+                <i class="fas fa-envelope"></i>
+
+                <div>
+                    <small>Email</small>
+                    <p>clydes0218@gmail.com</p>
+                </div>
+
             </div>
 
-            <button id="musicButton" onclick="toggleMusic()">
-                <i class="fas fa-play"></i>
+
+            <div class="detail-item">
+
+                <i class="fas fa-cake-candles"></i>
+
+                <div>
+                    <small>Birthday</small>
+                    <p>February 18, 2006</p>
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <i class="fas fa-user-graduate"></i>
+
+                <div>
+                    <small>Status</small>
+                    <p>3rd Year B.S.I.T. Student</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="projects">
+
+    <div class="section-heading">
+
+        <p class="section-label">MY WORK</p>
+
+        <h2>Featured Projects</h2>
+
+        <p>
+            Some of the systems and applications I've worked on.
+        </p>
+
+    </div>
+
+
+    <div class="projects-grid">
+
+
+        <article class="project-card">
+
+            <div class="project-top">
+
+                <div class="project-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+
+                <a href="https://sugo.page.gd/"
+                   target="_blank"
+                   class="project-link"
+                   aria-label="Open SUGO">
+
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+            </div>
+
+            <p class="project-type">
+                Web Application
+            </p>
+
+            <h3>SUGO System</h3>
+
+            <p>
+                A system designed to allow users to request help
+                in their selected location.
+            </p>
+
+            <div class="tech-list">
+
+                <span>Web</span>
+                <span>Database</span>
+                <span>System Development</span>
+
+            </div>
+
+            <a href="https://sugo.page.gd/"
+               target="_blank"
+               class="project-button">
+
+                View Project
+                <i class="fas fa-arrow-right"></i>
+
+            </a>
+
+        </article>
+
+
+
+        <article class="project-card">
+
+            <div class="project-top">
+
+                <div class="project-icon">
+                    <i class="fas fa-tv"></i>
+                </div>
+
+                <a href="https://animeforu.site.je"
+                   target="_blank"
+                   class="project-link"
+                   aria-label="Open Anime For U">
+
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+            </div>
+
+            <p class="project-type">
+                Web Application
+            </p>
+
+            <h3>Anime For U</h3>
+
+            <p>
+                A simple anime watchlist created for anime fans
+                to organize and keep track of the shows they watch.
+            </p>
+
+            <div class="tech-list">
+
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+
+            </div>
+
+            <a href="https://animeforu.site.je"
+               target="_blank"
+               class="project-button">
+
+                View Project
+                <i class="fas fa-arrow-right"></i>
+
+            </a>
+
+        </article>
+
+
+
+        <article class="project-card">
+
+            <div class="project-top">
+
+                <div class="project-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+
+                <span class="project-status">
+                    Personal
+                </span>
+
+            </div>
+
+            <p class="project-type">
+                Development
+            </p>
+
+            <h3>Personal Portfolio</h3>
+
+            <p>
+                A responsive portfolio website showcasing my
+                projects, skills, education, and current learning journey.
+            </p>
+
+            <div class="tech-list">
+
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="skills">
+
+    <div class="section-heading">
+
+        <p class="section-label">TECHNOLOGIES</p>
+
+        <h2>Skills & Tools</h2>
+
+        <p>
+            Technologies I've worked with or am currently exploring.
+        </p>
+
+    </div>
+
+
+    <div class="skills-grid">
+
+        <div class="skill-category">
+
+            <div class="skill-category-heading">
+
+                <i class="fas fa-code"></i>
+
+                <h3>Programming</h3>
+
+            </div>
+
+            <div class="skill-tags">
+
+                <span>Java</span>
+                <span>C</span>
+                <span>PHP</span>
+                <span>JavaScript</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <div class="skill-category-heading">
+
+                <i class="fas fa-globe"></i>
+
+                <h3>Web Development</h3>
+
+            </div>
+
+            <div class="skill-tags">
+
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <div class="skill-category-heading">
+
+                <i class="fas fa-database"></i>
+
+                <h3>Database</h3>
+
+            </div>
+
+            <div class="skill-tags">
+
+                <span>MySQL</span>
+                <span>Database Design</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <div class="skill-category-heading">
+
+                <i class="fab fa-linux"></i>
+
+                <h3>Tools & Systems</h3>
+
+            </div>
+
+            <div class="skill-tags">
+
+                <span>Git</span>
+                <span>GitHub</span>
+                <span>Linux</span>
+                <span>Ubuntu</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="section" id="education">
+
+    <div class="section-heading">
+
+        <p class="section-label">EDUCATION</p>
+
+        <h2>Academic Journey</h2>
+
+        <p>
+            My educational background.
+        </p>
+
+    </div>
+
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+
+                <span class="timeline-date">
+                    Current
+                </span>
+
+                <h3>Cebu Technological University</h3>
+
+                <p class="timeline-title">
+                    Bachelor of Science in Information Technology
+                </p>
+
+                <p>
+                    Currently pursuing a B.S.I.T. degree while developing
+                    practical skills in programming, systems development,
+                    databases, networking, and emerging technologies.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+
+                <span class="timeline-date">
+                    Graduated
+                </span>
+
+                <h3>Montaneza National High School</h3>
+
+                <p class="timeline-title">
+                    STEM Strand
+                </p>
+
+                <p>
+                    Completed senior high school education under
+                    the Science, Technology, Engineering, and Mathematics strand.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+
+                <span class="timeline-date">
+                    Graduated
+                </span>
+
+                <h3>Malabuyoc Central School</h3>
+
+                <p class="timeline-title">
+                    Elementary Education
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="section" id="learning">
+
+    <div class="section-heading">
+
+        <p class="section-label">LEARNING</p>
+
+        <h2>Currently Exploring</h2>
+
+        <p>
+            Technologies and concepts I'm currently studying and practicing.
+        </p>
+
+    </div>
+
+
+    <div class="learning-grid">
+
+        <div class="learning-card">
+
+            <div class="learning-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+
+            <div>
+
+                <h3>Artificial Intelligence</h3>
+
+                <p>
+                    Exploring AI concepts and building practical
+                    AI-powered applications.
+                </p>
+
+                <span>Learning</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="learning-card">
+
+            <div class="learning-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+
+            <div>
+
+                <h3>Machine Learning</h3>
+
+                <p>
+                    Studying machine learning fundamentals,
+                    data processing, and model concepts.
+                </p>
+
+                <span>Exploring</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="learning-card">
+
+            <div class="learning-icon">
+                <i class="fab fa-linux"></i>
+            </div>
+
+            <div>
+
+                <h3>Linux & Ubuntu</h3>
+
+                <p>
+                    Practicing Linux commands, system configuration,
+                    and development workflows.
+                </p>
+
+                <span>Practicing</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="learning-card">
+
+            <div class="learning-icon">
+                <i class="fas fa-network-wired"></i>
+            </div>
+
+            <div>
+
+                <h3>Networking</h3>
+
+                <p>
+                    Improving my knowledge of IP addressing,
+                    VLANs, security, and network design.
+                </p>
+
+                <span>Improving</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="contact-section" id="contact">
+
+    <div class="contact-content">
+
+        <p class="section-label">
+            GET IN TOUCH
+        </p>
+
+        <h2>
+            Let's build something together.
+        </h2>
+
+        <p>
+            Have a project idea, question, or just want to connect?
+            Send me a message.
+        </p>
+
+        <form id="contact">
+
+            <div class="input-row">
+
+                <input
+                    type="text"
+                    name="from_name"
+                    placeholder="Your name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    name="reply_to"
+                    placeholder="Your email"
+                    required
+                >
+
+            </div>
+
+            <textarea
+                id="message"
+                name="message"
+                rows="6"
+                placeholder="Write your message..."
+                required>
+            </textarea>
+
+            <button id="send" type="submit">
+
+                Send Message
+
+                <i class="fas fa-paper-plane"></i>
+
             </button>
 
-            <audio id="bgMusic" loop>
-                <source src="music.mp3" type="audio/mpeg">
-            </audio>
-        </div>
+        </form>
 
-        <br>
-
-        <div class="glass-card hidden-section" id="about">
-            <h2 style="color: var(--accent-color); margin-bottom: 15px;">About Me</h2>
-            <p><i class="fas fa-map-marker-alt"></i> Proper, Poblacion Dos, Malabuyoc, Cebu, Visayas, Philippines</p>
-            <p><i class="fas fa-envelope"></i> clydes0218@gmail.com</p>
-            <p><i class="fas fa-birthday-cake"></i> February 18, 2006 (<span id="age"></span> Years Old)</p>
-            <p id="birthday-countdown"></p>
-        </div>
-
-        <div class="glass-card hidden-section" id="my-works">
-            <h2 style="color: var(--accent-color); margin-bottom: 20px;">My Works</h2>
-            
-            <div class="work-list-item">
-                <a href="https://sugo.page.gd/" class="work-link" target="_blank">SUGO System</a>
-                <p class="work-desc">A System Where You Can Request Help In Your Selected Place.</p>
-                <br>
-                <a href="https://animeforu.site.je" class="work-link" target="_blank">Anime For U</a>
-                <p class="work-desc">A Simple Anime Watchlist for Anime Fans.</p>
-            </div>
-
-           
-
-        </div>
-
-        <div class="glass-card hidden-section" id="education">
-            <h2 style="color: var(--accent-color); margin-bottom: 15px;">Education</h2>
-            <p><strong>Cebu Technological University</strong> - B.S.I.T. (Current)</p>
-            <p><strong>Montaneza National High School</strong> - S.T.E.M. (Graduated)</p>
-            <p><strong>Malabuyoc Central School</strong> - (Graduated)</p>
-        </div>
-
-        <div class="glass-card hidden-section">
-            <h2 style="color: var(--accent-color); margin-bottom: 15px;">Programming Languages</h2>
-            <p>JAVA</p>
-            <div class="skill-bar"><div class="skill-per" style="width: 75%;"></div></div>
-            <p>C</p>
-            <div class="skill-bar"><div class="skill-per" style="width: 80%;"></div></div>
-            <p>MySQL</p>
-            <div class="skill-bar"><div class="skill-per" style="width: 65%;"></div></div>
-            <p>PHP</p>
-            <div class="skill-bar"><div class="skill-per" style="width: 35%;"></div></div>
-        </div>
-
-        <div class="glass-card hidden-section" id="learning">
-
-        <div class="learning-heading">
-            <div>
-                <h2>Currently Learning</h2>
-                <p>Things I'm currently exploring and improving.</p>
-            </div>
-
-            <div class="learning-icon-main">
-                <i class="fas fa-book-open"></i>
-            </div>
-        </div>
-
-        <div class="learning-grid">
-
-            <div class="learning-item">
-                <div class="learning-item-top">
-                    <div class="learning-item-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Artificial Intelligence</h3>
-                </div>
-
-                <p>
-                    Exploring AI concepts and building practical AI-powered applications.
-                </p>
-
-                <span class="learning-status">Learning</span>
-            </div>
-
-
-            <div class="learning-item">
-                <div class="learning-item-top">
-                    <div class="learning-item-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>Machine Learning</h3>
-                </div>
-
-                <p>
-                    Learning the fundamentals of machine learning and data processing.
-                </p>
-
-                <span class="learning-status">Exploring</span>
-            </div>
-
-
-            <div class="learning-item">
-                <div class="learning-item-top">
-                    <div class="learning-item-icon">
-                        <i class="fab fa-linux"></i>
-                    </div>
-                    <h3>Linux & Ubuntu</h3>
-                </div>
-
-                <p>
-                    Practicing Linux commands, system configuration, and development workflows.
-                </p>
-
-                <span class="learning-status">Practicing</span>
-            </div>
-
-
-            <div class="learning-item">
-                <div class="learning-item-top">
-                    <div class="learning-item-icon">
-                        <i class="fas fa-network-wired"></i>
-                    </div>
-                    <h3>Networking</h3>
-                </div>
-
-                <p>
-                    Improving my knowledge of IP addressing, VLANs, security, and network design.
-                </p>
-
-                <span class="learning-status">Improving</span>
-            </div>
-
-        </div>
     </div>
 
-        <div class="glass-card hidden-section" id="accounts">
-            <h2 style="text-align: center; margin-bottom: 20px;">My Socials :)</h2>
-            <div class="social-links">
-                <a href="https://www.facebook.com/clyde.limbaga.2025" target="_blank"><i class="fab fa-facebook"></i></a><br>
-                <a href="https://github.com/ClydeLimbaga420" target="_blank"><i class="fab fa-github"></i></a><br>
-                <a href="https://www.youtube.com/@Clydesu324" target="_blank"><i class="fab fa-youtube"></i></a><br>
-                <a href="https://www.instagram.com/clydelimbaga/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+
+            <a href="#home" class="footer-logo">
+                Clyde.
+            </a>
+
+            <p>
+                IT Student & Aspiring Developer
+            </p>
+
         </div>
 
-        <div class="glass-card hidden-section" id="contact-form">
-            <h2 style="margin-bottom: 15px;">Write a Message</h2>
-            <form id="contact">
-                <textarea placeholder="Write your message here..." id="message" name="message" rows="5" required></textarea>
-                <button id="send" type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
-            </form>
+
+        <div class="footer-socials">
+
+            <a href="https://github.com/ClydeLimbaga420"
+               target="_blank">
+
+                <i class="fab fa-github"></i>
+
+            </a>
+
+            <a href="https://www.linkedin.com/in/clyde-limbaga-02190b3b7/"
+               target="_blank">
+
+                <i class="fab fa-linkedin"></i>
+
+            </a>
+
+            <a href="https://www.youtube.com/@Clydesu324"
+               target="_blank">
+
+                <i class="fab fa-youtube"></i>
+
+            </a>
+
+            <a href="https://www.instagram.com/clydelimbaga/?hl=en"
+               target="_blank">
+
+                <i class="fab fa-instagram"></i>
+
+            </a>
+
         </div>
+
     </div>
-    <script src="Profile.js"></script>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © <span id="year"></span> Clyde Limbaga. All rights reserved.
+        </p>
+
+        <p id="birthday-countdown"></p>
+
+    </div>
+
+</footer>
+
+
+
+<div class="music-player">
+
+    <div class="music-disc" id="musicDisc">
+
+        <i class="fas fa-music"></i>
+
+    </div>
+
+    <div class="music-info">
+
+        <span class="music-label">
+            Now Playing
+        </span>
+
+        <span class="music-title">
+            Sway - Bic Runga
+        </span>
+
+    </div>
+
+    <button id="musicButton"
+            onclick="toggleMusic()"
+            aria-label="Play music">
+
+        <i class="fas fa-play"></i>
+
+    </button>
+
+    <audio id="bgMusic" loop>
+
+        <source src="music.mp3" type="audio/mpeg">
+
+    </audio>
+
+</div>
+
+
+<script src="Profile.js"></script>
 
 </body>
 </html>
