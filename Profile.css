@@ -1791,3 +1791,8 @@ body.darkmode .light-photo {
 body.darkmode .dark-photo {
     opacity: 1;
 }
+
+#send:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}

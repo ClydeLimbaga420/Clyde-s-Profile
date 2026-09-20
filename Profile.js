@@ -40,24 +40,36 @@ window.addEventListener("DOMContentLoaded", () => {
     updateBirthdayCountdown();
 });
 
-emailjs.init("km6Tyg98f7Puogtzw");
+emailjs.init({
+    publicKey: "km6Tyg98f7Puogtzw"
+});
 
-document.getElementById("contact").addEventListener("submit", function (e) {
+const contactForm = document.getElementById("contactForm");
+const sendButton = document.getElementById("send");
+
+contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const btn = document.getElementById("send");
-    btn.innerText = "Sending...";
+    sendButton.disabled = true;
+    sendButton.innerText = "Sending...";
 
-    emailjs.sendForm("service_nzw6rqb", "template_3qoho3c", this)
-        .then(() => {
-            alert("Message Sent!");
-            this.reset();
-            btn.innerText = "Send Message";
-        })
-        .catch(() => {
-            alert("Failed to send.");
-            btn.innerText = "Send Message";
-        });
+    emailjs.sendForm(
+        "service_nzw6rqb",
+        "template_3qoho3c",
+        contactForm
+    )
+    .then(() => {
+        alert("Message Sent!");
+        contactForm.reset();
+        sendButton.disabled = false;
+        sendButton.innerText = "Send Message";
+    })
+    .catch((error) => {
+        console.error("EMAILJS ERROR:", error);
+        alert("Failed to send.");
+        sendButton.disabled = false;
+        sendButton.innerText = "Send Message";
+    });
 });
 
 function calculateAge() {
