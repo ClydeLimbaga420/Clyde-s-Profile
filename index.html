@@ -240,6 +240,7 @@
                 <div>
                     <small>Birthday</small>
                     <p>February 18, 2006</p>
+                    <span id="birthday-countdown"></span>
                 </div>
 
             </div>
@@ -260,9 +261,9 @@
 
     </div>
 
-    <div class="birthday-box">
+    <!--<div class="birthday-box">
     <i class="fas fa-gift"></i>
-    <span id="birthday-countdown"></span>
+    -->
     
 </div>
 
@@ -933,6 +934,21 @@
 
     </audio>
 
+</div>
+
+<div id="emailToast" class="email-toast">
+    <div class="toast-icon">
+        <i class="fas fa-check"></i>
+    </div>
+
+    <div class="toast-content">
+        <strong>Message Sent!</strong>
+        <span>Thanks for reaching out. I'll get back to you soon.</span>
+    </div>
+
+    <button onclick="closeEmailToast()" aria-label="Close">
+        <i class="fas fa-xmark"></i>
+    </button>
 </div>
 
 
