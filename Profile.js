@@ -43,6 +43,18 @@ window.addEventListener("DOMContentLoaded", () => {
     if (year) {
         year.textContent = new Date().getFullYear();
     }
+
+    const navLinks = document.querySelectorAll("#navMenu a");
+
+    navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            const navMenu = document.getElementById("navMenu");
+
+            if (navMenu) {
+                navMenu.classList.remove("active");
+            }
+        });
+    });
 });
 
 emailjs.init({
@@ -100,6 +112,24 @@ function showEmailToast() {
     if (!emailToast) return;
 
     emailToast.classList.remove("error");
+
+    const icon = emailToast.querySelector(".toast-icon");
+    const title = emailToast.querySelector(".toast-content strong");
+    const message = emailToast.querySelector(".toast-content span");
+
+    if (icon) {
+        icon.innerHTML = '<i class="fas fa-check"></i>';
+    }
+
+    if (title) {
+        title.textContent = "Message Sent!";
+    }
+
+    if (message) {
+        message.textContent =
+            "Thanks for reaching out. I'll get back to you soon.";
+    }
+
     emailToast.classList.add("show");
 
     setTimeout(() => {
@@ -128,7 +158,8 @@ function showEmailError() {
     }
 
     if (message) {
-        message.textContent = "Something went wrong. Please try again.";
+        message.textContent =
+            "Something went wrong. Please try again.";
     }
 
     setTimeout(() => {
