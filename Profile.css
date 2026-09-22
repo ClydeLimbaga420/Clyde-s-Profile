@@ -1257,3 +1257,203 @@ body.darkmode .logo-acronym {
     background: rgba(255, 255, 255, 0.08);
 }
 
+
+.academic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.academic-card {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.academic-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-hover);
+}
+
+.academic-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.academic-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--accent);
+    background: var(--accent-soft);
+
+    border-radius: 10px;
+}
+
+.academic-type {
+    padding: 5px 9px;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    color: var(--text-secondary);
+
+    font-size: 0.65rem;
+    font-weight: 600;
+}
+
+.academic-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.academic-description {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+}
+
+.academic-role {
+    display: flex;
+    flex-direction: column;
+
+    padding: 12px 14px;
+    margin-bottom: 20px;
+
+    background: var(--surface-soft);
+    border-radius: 10px;
+}
+
+.academic-role small,
+.team-section > small {
+    color: var(--text-muted);
+
+    font-size: 0.65rem;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.academic-role strong {
+    color: var(--text);
+    font-size: 0.78rem;
+    margin-top: 3px;
+}
+
+
+/* TEAM MEMBERS */
+
+.team-section {
+    margin-bottom: 25px;
+}
+
+.team-section > small {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.team-members {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 9px;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    transition: 0.2s ease;
+}
+
+.team-member:hover {
+    background: var(--accent-soft);
+    border-color: var(--border);
+}
+
+.team-avatar {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--surface-soft);
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
+}
+
+.team-member:hover .team-avatar {
+    color: var(--accent);
+}
+
+.team-member div:last-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.team-member strong {
+    color: var(--text);
+    font-size: 0.75rem;
+}
+
+.team-member span {
+    color: var(--text-muted);
+    font-size: 0.65rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.academic-card .project-button {
+    margin-top: auto;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .academic-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .academic-card {
+        padding: 20px;
+    }
+
+}
+
