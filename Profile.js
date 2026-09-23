@@ -350,3 +350,66 @@ function toggleMusic() {
         musicDisc.classList.remove("playing");
     }
 }
+
+// SEASONAL PARTICLE EFFECTS
+function getSeason(date = new Date()) {
+    const month = date.getMonth(); // 0 = Jan
+    if (month === 11 || month <= 1) return "winter";
+    if (month >= 2 && month <= 4) return "spring";
+    if (month >= 5 && month <= 7) return "summer";
+    return "autumn";
+}
+
+const SEASON_CONFIG = {
+    winter: { symbols: ["❄", "❅", "❆"], count: 28, minSize: 10, maxSize: 20, minDuration: 8, maxDuration: 16 },
+    spring: { symbols: ["🌸", "🌷", "💮"], count: 16, minSize: 14, maxSize: 22, minDuration: 9, maxDuration: 17 },
+    autumn: { symbols: ["🍁", "🍂"], count: 18, minSize: 14, maxSize: 24, minDuration: 7, maxDuration: 14 },
+    summer: { symbols: ["✨"], count: 14, minSize: 6, maxSize: 12, minDuration: 4, maxDuration: 7, firefly: true }
+};
+
+function spawnParticle(config) {
+    const el = document.createElement("span");
+    const symbol = config.symbols[Math.floor(Math.random() * config.symbols.length)];
+    const size = config.minSize + Math.random() * (config.maxSize - config.minSize);
+    const duration = config.minDuration + Math.random() * (config.maxDuration - config.minDuration);
+    const drift = (Math.random() - 0.5) * 160;
+
+    el.textContent = symbol;
+    el.className = config.firefly ? "seasonal-particle particle-firefly" : "seasonal-particle";
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = size + "px";
+    el.style.setProperty("--drift", drift + "px");
+    el.style.setProperty("--spin", (Math.random() * 360) + "deg");
+    el.style.animationDuration = duration + "s";
+
+    if (config.firefly) {
+        el.style.top = Math.random() * 90 + "vh";
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.animationDelay = (Math.random() * 3) + "s";
+    }
+
+    document.body.appendChild(el);
+
+    if (!config.firefly) {
+        el.addEventListener("animationend", () => el.remove());
+    }
+}
+
+function startSeasonalEffect() {
+    const season = getSeason();
+    const config = SEASON_CONFIG[season];
+    if (!config) return;
+
+    if (config.firefly) {
+        for (let i = 0; i < config.count; i++) spawnParticle(config);
+        return;
+    }
+
+    // Spawn a burst, then keep spawning on an interval to keep it going
+    for (let i = 0; i < config.count / 2; i++) {
+        setTimeout(() => spawnParticle(config), Math.random() * 4000);
+    }
+    setInterval(() => spawnParticle(config), 1200);
+}
+
+window.addEventListener("DOMContentLoaded", startSeasonalEffect);

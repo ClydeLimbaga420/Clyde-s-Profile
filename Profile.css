@@ -1457,3 +1457,45 @@ body.darkmode .logo-acronym {
 
 }
 
+/* SEASONAL PARTICLES */
+.seasonal-particle {
+    position: fixed;
+    top: -40px;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+    animation-name: seasonalFall;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    will-change: transform, opacity;
+}
+
+@keyframes seasonalFall {
+    0% {
+        transform: translate(0, -5vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+        transform: translate(var(--drift, 40px), 105vh) rotate(var(--spin, 200deg));
+        opacity: 0;
+    }
+}
+
+.particle-firefly {
+    animation-name: fireflyFloat;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes fireflyFloat {
+    0%   { transform: translate(0, 0); opacity: 0.2; }
+    50%  { transform: translate(var(--drift, 30px), -30px); opacity: 1; }
+    100% { transform: translate(calc(var(--drift, 30px) * -1), 20px); opacity: 0.3; }
+}
+
+@media (max-width: 700px) {
+    .seasonal-particle { font-size: 0.85em; }
+}
