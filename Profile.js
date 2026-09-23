@@ -37,6 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     calculateAge();
     updateBirthdayCountdown();
+    setRandomGreeting();
 
     const year = document.getElementById("year");
 
@@ -397,6 +398,8 @@ function spawnParticle(config) {
 
 function startSeasonalEffect() {
     const season = getSeason();
+    document.body.classList.toggle("season-summer", season === "summer");
+
     const config = SEASON_CONFIG[season];
     if (!config) return;
 
@@ -410,6 +413,20 @@ function startSeasonalEffect() {
         setTimeout(() => spawnParticle(config), Math.random() * 4000);
     }
     setInterval(() => spawnParticle(config), 1200);
+}
+
+// RANDOM GREETING ON LOAD
+const GREETINGS = [
+    "Hi", "Hola", "Bonjour", "Ciao", "Hallo", "Olá",
+    "Kumusta", "こんにちは", "안녕하세요", "你好",
+    "Salam", "Namaste", "Привет", "Merhaba", "Yassou"
+];
+
+function setRandomGreeting() {
+    const el = document.getElementById("greetingWord");
+    if (!el) return;
+    const greeting = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+    el.textContent = greeting;
 }
 
 window.addEventListener("DOMContentLoaded", startSeasonalEffect);
