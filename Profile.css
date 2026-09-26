@@ -1462,7 +1462,7 @@ body.darkmode .logo-acronym {
 .seasonal-particle {
     position: fixed;
     top: -40px;
-    z-index: 5;
+    z-index: -1;
     pointer-events: none;
     user-select: none;
     animation-name: seasonalFall;
