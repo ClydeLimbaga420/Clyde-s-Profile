@@ -362,10 +362,10 @@ function getSeason(date = new Date()) {
 }
 
 const SEASON_CONFIG = {
-    winter: { symbols: ["❄", "❅", "❆"], count: 28, minSize: 10, maxSize: 20, minDuration: 8, maxDuration: 16 },
-    spring: { symbols: ["🌸", "🌷", "💮"], count: 16, minSize: 14, maxSize: 22, minDuration: 9, maxDuration: 17 },
-    autumn: { symbols: ["🍁", "🍂"], count: 18, minSize: 14, maxSize: 24, minDuration: 7, maxDuration: 14 },
-    summer: { symbols: ["✨"], count: 14, minSize: 6, maxSize: 12, minDuration: 4, maxDuration: 7, firefly: true }
+    winter: { symbols: ["❄", "❅", "❆"], count: 4, interval: 3200, minSize: 10, maxSize: 20, minDuration: 8, maxDuration: 16 },
+    spring: { symbols: ["🌸", "🌷", "💮"], count: 4, interval: 3400, minSize: 14, maxSize: 22, minDuration: 9, maxDuration: 17 },
+    autumn: { symbols: ["🍁", "🍂"], count: 4, interval: 3000, minSize: 14, maxSize: 24, minDuration: 7, maxDuration: 14 },
+    summer: { symbols: ["✨"], count: 5, minSize: 6, maxSize: 12, minDuration: 4, maxDuration: 7, firefly: true }
 };
 
 function spawnParticle(config) {
@@ -412,7 +412,7 @@ function startSeasonalEffect() {
     for (let i = 0; i < config.count / 2; i++) {
         setTimeout(() => spawnParticle(config), Math.random() * 4000);
     }
-    setInterval(() => spawnParticle(config), 1200);
+    setInterval(() => spawnParticle(config), config.interval || 3200);
 }
 
 // RANDOM GREETING ON LOAD
