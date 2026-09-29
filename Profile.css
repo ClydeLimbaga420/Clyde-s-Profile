@@ -356,8 +356,20 @@ body.darkmode .hero-photo:hover .dark-hover-photo {
 
 .section {
     max-width: 1050px;
-    margin: auto;
-    padding: 100px 25px;
+    margin: 50px auto;
+    padding: 60px 50px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface-soft);
+    box-shadow: var(--shadow);
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.section:hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    box-shadow: var(--shadow-hover);
 }
 
 .section-heading {
@@ -709,12 +721,20 @@ body.darkmode .hero-photo:hover .dark-hover-photo {
 
 .contact-section {
     max-width: 1050px;
-    margin: 50px auto 100px;
+    margin: 50px auto;
     padding: 70px 50px;
     border-radius: 20px;
     background: var(--surface);
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.contact-section:hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    box-shadow: var(--shadow-hover);
 }
 
 .contact-content {
@@ -1130,7 +1150,9 @@ body.darkmode .email-toast {
     }
 
     .section {
-        padding: 75px 20px;
+        margin: 25px auto;
+        padding: 40px 20px;
+        border-radius: 16px;
     }
 
     .projects-grid,
@@ -1205,6 +1227,12 @@ body.darkmode .email-toast {
 
     .project-card {
         min-height: auto;
+    }
+
+    .section {
+        margin: 15px auto;
+        padding: 32px 16px;
+        border-radius: 14px;
     }
 
     .contact-section {
