@@ -1,7 +1,0 @@
-CREATE TABLE likes (
-    id INTEGER PRIMARY KEY,
-    "count" INTEGER NOT NULL DEFAULT 500
-);
-
-INSERT INTO likes (id, "count")
-VALUES (1, 500);
