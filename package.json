@@ -1,0 +1,10 @@
+{
+    "name": "clydes-profile",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "description": "Personal portfolio site. Only the Netlify Function depends on npm; the site itself is still static.",
+    "dependencies": {
+        "@neondatabase/serverless": "1.2.0"
+    }
+}

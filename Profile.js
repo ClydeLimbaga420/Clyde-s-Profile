@@ -19,6 +19,68 @@ function toggleMenu() {
     }
 }
 
+const LIKES_ENDPOINT = "/.netlify/functions/likes";
+const LIKES_FALLBACK = 500;
+
+function showLikes(value) {
+    const counter = document.getElementById("likeCount");
+
+    if (counter) {
+        counter.textContent = value;
+    }
+}
+
+function animateLike() {
+    const button = document.getElementById("likeButton");
+
+    if (button) {
+        button.classList.remove("liked");
+        void button.offsetWidth;
+        button.classList.add("liked");
+    }
+}
+
+async function likeSite() {
+    const button = document.getElementById("likeButton");
+
+    if (button) {
+        button.disabled = true;
+    }
+
+    try {
+        const response = await fetch(LIKES_ENDPOINT, { method: "POST" });
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Likes are unavailable");
+        }
+
+        showLikes(data.likes);
+        animateLike();
+    } catch (error) {
+        console.error("LIKES ERROR:", error);
+    } finally {
+        if (button) {
+            button.disabled = false;
+        }
+    }
+}
+
+async function loadLikes() {
+    try {
+        const response = await fetch(LIKES_ENDPOINT);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Likes are unavailable");
+        }
+
+        showLikes(data.likes);
+    } catch {
+        showLikes(LIKES_FALLBACK);
+    }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     const isDark = localStorage.getItem("darkmode") === "true";
     const button = document.getElementById("themeButton");
@@ -38,6 +100,7 @@ window.addEventListener("DOMContentLoaded", () => {
     calculateAge();
     updateBirthdayCountdown();
     setRandomGreeting();
+    loadLikes();
 
     const year = document.getElementById("year");
 

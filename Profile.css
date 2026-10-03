@@ -12,6 +12,7 @@
     --accent-soft: rgba(37, 99, 235, 0.08);
     --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
     --shadow-hover: 0 20px 40px rgba(15, 23, 42, 0.10);
+    --like: #ef4444;
 }
 
 .darkmode {
@@ -28,6 +29,7 @@
     --accent-soft: rgba(56, 189, 248, 0.08);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.35);
+    --like: #f87171;
 }
 
 * {
@@ -238,6 +240,62 @@ img {
 .secondary-button:hover {
     border-color: var(--accent);
     color: var(--accent);
+}
+
+.hero-likes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.like-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 20px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text);
+    background: var(--surface);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.like-button:hover:not(:disabled) {
+    border-color: var(--like);
+    color: var(--like);
+    transform: translateY(-2px);
+}
+
+.like-button:disabled {
+    opacity: 0.6;
+    cursor: progress;
+    transform: none;
+}
+
+.like-button.liked i {
+    color: var(--like);
+    animation: likePop 0.35s ease;
+}
+
+.like-caption {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+@keyframes likePop {
+    0% {
+        transform: scale(1);
+    }
+    45% {
+        transform: scale(1.35);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .hero-socials {
