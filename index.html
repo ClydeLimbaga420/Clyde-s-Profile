@@ -101,7 +101,7 @@
 
         </div>
 
-        <div class="hero-socials">
+        <div class="hero-socials" id="heroSocials">
 
             <a href="https://github.com/ClydeLimbaga420"
                target="_blank"
@@ -222,7 +222,7 @@
 
                 <div>
                     <small>Location</small>
-                    <p>Proper, Poblacion Dos, Malabuyoc, Cebu, Visayas, Philippines, South East Asia, Asia</p>
+                    <p id="locationText">Proper, Poblacion Dos, Malabuyoc, Cebu, Visayas, Philippines, South East Asia, Asia</p>
                 </div>
 
             </div>
@@ -233,8 +233,10 @@
 
                 <div>
                     <small>Email</small>
-                    <p>clydes0218@gmail.com</p>
-                    <p>limbagaclyde99@gmail.com</p>
+                    <div id="emailList">
+                        <p>clydes0218@gmail.com</p>
+                        <p>limbagaclyde99@gmail.com</p>
+                    </div>
                 </div>
 
             </div>
@@ -257,7 +259,7 @@
 
                 <div>
                     <small>Status</small>
-                    <p>3rd Year B.S.I.T. Student</p>
+                    <p id="aboutStatus">3rd Year B.S.I.T. Student</p>
                 </div>
 
             </div>
@@ -282,7 +284,7 @@
 
     </div>
 
-    <div class="projects-grid">
+    <div class="projects-grid" id="projectsGrid">
 
         <article class="project-card">
 
@@ -507,7 +509,7 @@
 
     </div>
 
-    <div class="academic-grid">
+    <div class="academic-grid" id="academicGrid">
 
        
         <article class="academic-card">
@@ -944,6 +946,14 @@
 
     </div>
 
+    <div class="logo-wall" id="logoWall" hidden>
+
+        <p class="section-label">LOGOS</p>
+
+        <div class="logo-grid" id="logoGrid"></div>
+
+    </div>
+
 </section>
 
 <section class="section" id="education">
@@ -1256,7 +1266,7 @@
 
         </div>
 
-        <div class="footer-socials">
+        <div class="footer-socials" id="footerSocials">
 
             <a href="https://www.facebook.com/clydeszz0218"
                target="_blank"
@@ -1304,7 +1314,18 @@
             © <span id="year"></span> Clyde Limbaga. All rights reserved.
         </p>
 
-        <p id="birthday-countdown-footer"></p>
+        <div class="footer-bottom-right">
+
+            <p id="birthday-countdown-footer"></p>
+
+            <a href="admin.html"
+               class="footer-admin"
+               aria-label="Content admin"
+               title="Content admin">
+                <i class="fas fa-gear"></i>
+            </a>
+
+        </div>
 
     </div>
 
@@ -1363,6 +1384,8 @@
     </button>
 
 </div>
+
+<script src="content.js"></script>
 
 <script src="Profile.js"></script>
 

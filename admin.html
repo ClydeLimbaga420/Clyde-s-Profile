@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Content Admin | Clyde's Profile</title>
+
+    <link rel="icon" href="Logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="admin-locked">
+
+<section class="login-gate" id="loginGate" aria-label="Admin login">
+
+    <form class="login-card" id="loginForm" aria-labelledby="loginTitle">
+
+        <a href="index.html" class="admin-brand">
+            Clyde<span>.</span> Admin
+        </a>
+
+        <h1 class="login-title" id="loginTitle">Admin access</h1>
+
+        <p class="login-copy">
+            Enter the password to continue.
+        </p>
+
+        <label class="login-field" for="adminPassword">
+            <span>Password</span>
+            <input id="adminPassword"
+                   name="adminPassword"
+                   type="password"
+                   autocomplete="current-password"
+                   placeholder="Password"
+                   autofocus
+                   required>
+        </label>
+
+        <p class="login-error" id="loginError" role="alert" hidden></p>
+
+        <button id="loginSubmit" class="btn primary" type="submit">
+            <i class="fas fa-unlock"></i>
+            Unlock
+        </button>
+
+        <p class="login-note">
+            Local access gate. It keeps casual visitors out, but does not secure content on the host.
+        </p>
+
+    </form>
+
+</section>
+
+<header class="admin-header">
+
+    <div class="admin-header-inner">
+
+        <div class="admin-intro">
+
+            <a href="index.html" class="admin-brand">
+                Clyde<span>.</span> Admin
+            </a>
+
+            <p>
+                Edit content here, then download <code>content.js</code>
+                and replace the file in your repo.
+            </p>
+
+        </div>
+
+        <div class="admin-actions">
+
+            <span class="save-state" id="saveState">
+                Using content.js
+            </span>
+
+            <a href="index.html"
+               target="_blank"
+               rel="noopener"
+               class="btn ghost">
+                <i class="fas fa-arrow-up-right-from-square"></i>
+                View site
+            </a>
+
+            <button id="lockBtn" class="btn ghost" type="button">
+                <i class="fas fa-lock"></i>
+                Lock
+            </button>
+
+            <button id="resetBtn" class="btn ghost" type="button">
+                <i class="fas fa-rotate-left"></i>
+                Reset draft
+            </button>
+
+            <button id="importBtn" class="btn ghost" type="button">
+                <i class="fas fa-upload"></i>
+                Import
+            </button>
+
+            <input id="importFile"
+                   type="file"
+                   accept=".js,.json,application/json,text/javascript"
+                   hidden>
+
+            <button id="exportBtn" class="btn primary" type="button">
+                <i class="fas fa-download"></i>
+                Export content.js
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+<nav class="admin-tabs" id="adminTabs" aria-label="Content types">
+
+    <button class="tab active" type="button" data-tab="projects">
+        <i class="fas fa-folder"></i>
+        Projects
+    </button>
+
+    <button class="tab" type="button" data-tab="people">
+        <i class="fas fa-users"></i>
+        People
+    </button>
+
+    <button class="tab" type="button" data-tab="contacts">
+        <i class="fas fa-address-card"></i>
+        Contacts
+    </button>
+
+    <button class="tab" type="button" data-tab="logos">
+        <i class="fas fa-shapes"></i>
+        Logos
+    </button>
+
+</nav>
+
+<main class="admin-main">
+
+<section class="tab-panel active" data-panel="projects">
+
+    <div class="panel-grid">
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h2>Projects</h2>
+                    <p class="panel-hint">
+                        Featured cards and academic team projects.
+                    </p>
+                </div>
+
+                <button id="newProject" class="btn small primary" type="button">
+                    <i class="fas fa-plus"></i>
+                    New
+                </button>
+
+            </div>
+
+            <div class="item-list" id="projectList"></div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h2 id="projectFormTitle">New project</h2>
+                    <p class="panel-hint">
+                        Blank fields are hidden on the site.
+                    </p>
+                </div>
+
+            </div>
+
+            <form id="projectForm" class="editor-form">
+
+                <input id="projectId" type="hidden">
+
+                <label>
+                    Title
+                    <input id="projectTitle"
+                           type="text"
+                           placeholder="My Project"
+                           required>
+                </label>
+
+                <div class="form-row">
+
+                    <label>
+                        Section
+                        <select id="projectSection">
+                            <option value="featured">Featured</option>
+                            <option value="academic">Academic</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Type
+                        <input id="projectType"
+                               type="text"
+                               placeholder="Web Application">
+                    </label>
+
+                </div>
+
+                <div class="form-row">
+
+                    <label>
+                        Status badge
+                        <input id="projectStatus"
+                               type="text"
+                               placeholder="Personal / Deployed">
+                    </label>
+
+                    <label>
+                        Icon class
+                        <input id="projectIcon"
+                               type="text"
+                               list="iconOptions"
+                               placeholder="fas fa-code">
+                    </label>
+
+                </div>
+
+                <label>
+                    Description
+                    <textarea id="projectDescription"
+                              rows="4"
+                              placeholder="What does it do?"></textarea>
+                </label>
+
+                <label>
+                    Tech tags
+                    <input id="projectTech"
+                           type="text"
+                           placeholder="HTML, CSS, JavaScript">
+                </label>
+
+                <div class="form-row">
+
+                    <label>
+                        Project link
+                        <input id="projectLink"
+                               type="url"
+                               placeholder="https://...">
+                    </label>
+
+                    <label>
+                        Button label
+                        <input id="projectLinkLabel"
+                               type="text"
+                               placeholder="View Project">
+                    </label>
+
+                </div>
+
+                <div class="contributors-box">
+
+                    <span class="field-label">
+                        Contributors
+                        <small>Shown on academic cards.</small>
+                    </span>
+
+                    <div class="checks" id="projectContributors"></div>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button class="btn primary" type="submit">
+                        Save project
+                    </button>
+
+                    <button id="cancelProject" class="btn ghost" type="button">
+                        Clear form
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="tab-panel" data-panel="people">
+
+    <div class="panel-grid">
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h2>People</h2>
+                    <p class="panel-hint">
+                        Add someone here, then tick them as a contributor
+                        on an academic project.
+                    </p>
+                </div>
+
+                <button id="newPerson" class="btn small primary" type="button">
+                    <i class="fas fa-plus"></i>
+                    New
+                </button>
+
+            </div>
+
+            <div class="item-list" id="personList"></div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h2 id="personFormTitle">New person</h2>
+                    <p class="panel-hint">
+                        Photos are resized to 192px and embedded in content.js.
+                    </p>
+                </div>
+
+            </div>
+
+            <form id="personForm" class="editor-form">
+
+                <input id="personId" type="hidden">
+
+                <label>
+                    Name
+                    <input id="personName"
+                           type="text"
+                           placeholder="Full name"
+                           required>
+                </label>
+
+                <label>
+                    Link
+                    <input id="personUrl"
+                           type="url"
+                           placeholder="https://...">
+                </label>
+
+                <label>
+                    Subtitle
+                    <input id="personLabel"
+                           type="text"
+                           placeholder="github.com/username">
+                </label>
+
+                <label>
+                    Icon class
+                    <input id="personIcon"
+                           type="text"
+                           list="iconOptions"
+                           placeholder="fab fa-github">
+                </label>
+
+                <div class="image-field">
+
+                    <label>
+                        Avatar image URL
+                        <input id="personImageUrl"
+                               type="text"
+                               placeholder="https://... or photo.jpg">
+                    </label>
+
+                    <label class="file-label">
+                        Upload avatar
+                        <input id="personImageFile"
+                               type="file"
+                               accept="image/*">
+                    </label>
+
+                    <div class="image-preview" id="personImagePreview"></div>
+
+                    <button id="personImageClear"
+                            class="btn small ghost"
+                            type="button">
+                        Remove image
+                    </button>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button class="btn primary" type="submit">
+                        Save person
+                    </button>
+
+                    <button id="cancelPerson" class="btn ghost" type="button">
+                        Clear form
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="tab-panel" data-panel="contacts">
+
+    <div class="panel narrow">
+
+        <div class="panel-head">
+
+            <div>
+                <h2>Contacts</h2>
+                <p class="panel-hint">
+                    Location, emails, and social links used in the hero,
+                    about section, and footer.
+                </p>
+            </div>
+
+        </div>
+
+        <form id="contactsForm" class="editor-form">
+
+            <div class="form-row">
+
+                <label>
+                    Location
+                    <input id="contactLocation"
+                           type="text"
+                           placeholder="City, Country">
+                </label>
+
+                <label>
+                    Status
+                    <input id="contactStatus"
+                           type="text"
+                           placeholder="3rd Year B.S.I.T. Student">
+                </label>
+
+            </div>
+
+            <label>
+                Emails
+                <textarea id="contactEmails"
+                          rows="3"
+                          placeholder="One email per line"></textarea>
+            </label>
+
+            <div class="panel-head sub">
+
+                <div>
+                    <h3>Social links</h3>
+                    <p class="panel-hint">
+                        Tick Hero and/or Footer to choose where each link appears.
+                    </p>
+                </div>
+
+                <button id="addSocial" class="btn small ghost" type="button">
+                    <i class="fas fa-plus"></i>
+                    Add social
+                </button>
+
+            </div>
+
+            <div class="social-rows" id="socialRows"></div>
+
+            <div class="form-actions">
+
+                <button class="btn primary" type="submit">
+                    Save contacts
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+<section class="tab-panel" data-panel="logos">
+
+    <div class="panel-grid">
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h2>Logos</h2>
+                    <p class="panel-hint">
+                        The logo strip appears under Skills only when at
+                        least one logo exists.
+                    </p>
+                </div>
+
+                <button id="newLogo" class="btn small primary" type="button">
+                    <i class="fas fa-plus"></i>
+                    New
+                </button>
+
+            </div>
+
+            <div class="item-list" id="logoList"></div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h2 id="logoFormTitle">New logo</h2>
+                    <p class="panel-hint">
+                        Images are resized to 256px and embedded in content.js.
+                    </p>
+                </div>
+
+            </div>
+
+            <form id="logoForm" class="editor-form">
+
+                <input id="logoId" type="hidden">
+
+                <label>
+                    Name
+                    <input id="logoName"
+                           type="text"
+                           placeholder="Company or tool name">
+                </label>
+
+                <label>
+                    Link
+                    <input id="logoUrl"
+                           type="url"
+                           placeholder="https://...">
+                </label>
+
+                <div class="image-field">
+
+                    <label>
+                        Image URL
+                        <input id="logoImageUrl"
+                               type="text"
+                               placeholder="https://... or Logo.png">
+                    </label>
+
+                    <label class="file-label">
+                        Upload image
+                        <input id="logoImageFile"
+                               type="file"
+                               accept="image/*">
+                    </label>
+
+                    <div class="image-preview wide" id="logoImagePreview"></div>
+
+                    <button id="logoImageClear"
+                            class="btn small ghost"
+                            type="button">
+                        Remove image
+                    </button>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button class="btn primary" type="submit">
+                        Save logo
+                    </button>
+
+                    <button id="cancelLogo" class="btn ghost" type="button">
+                        Clear form
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<datalist id="iconOptions">
+    <option value="fas fa-code"></option>
+    <option value="fas fa-tv"></option>
+    <option value="fas fa-gamepad"></option>
+    <option value="fas fa-robot"></option>
+    <option value="fas fa-hand-holding-heart"></option>
+    <option value="fas fa-boxes-stacked"></option>
+    <option value="fas fa-globe"></option>
+    <option value="fas fa-database"></option>
+    <option value="fas fa-brain"></option>
+    <option value="fas fa-network-wired"></option>
+    <option value="fas fa-location-dot"></option>
+    <option value="fas fa-envelope"></option>
+    <option value="fas fa-cake-candles"></option>
+    <option value="fas fa-user-graduate"></option>
+    <option value="fab fa-github"></option>
+    <option value="fab fa-linkedin"></option>
+    <option value="fab fa-facebook"></option>
+    <option value="fab fa-youtube"></option>
+    <option value="fab fa-instagram"></option>
+    <option value="fab fa-gitlab"></option>
+    <option value="fab fa-linux"></option>
+</datalist>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="content.js"></script>
+
+<script src="admin.js"></script>
+
+</body>
+</html>

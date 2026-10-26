@@ -13,6 +13,7 @@ Repo: <https://github.com/ClydeLimbaga420/Clyde-s-Profile>
 - **Birthday countdown** — live days/hours/minutes/seconds, with confetti on the day
 - **Random greeting** — the hero says hi in a different language on each visit
 - **Contact form** — sends through EmailJS with success/error toasts
+- **Content admin** — add/edit projects, people, contacts, and logos in `admin.html`; preview changes in the browser and export `content.js` to commit
 - Smooth-scroll navigation, mobile hamburger menu, and responsive breakpoints at 900px / 700px / 400px
 
 ## Stack
@@ -23,9 +24,11 @@ dependencies: Google Fonts (Inter), Font Awesome 6.4.0, and `@emailjs/browser@4`
 ## Structure
 
 ```
-index.html    the entire site — all content, edited in place
+index.html    page shell; hardcoded cards are a no-JS fallback
+content.js    source of truth for projects, people, contacts, and logos
+admin.html    browser content editor (also admin.css / admin.js)
 Profile.css   all styling, dark mode tokens in :root / .darkmode
-Profile.js    theme toggle, music, EmailJS, countdown, seasonal particles
+Profile.js    content rendering, theme toggle, music, EmailJS, countdown, particles
 Logo.png      favicon
 Profile.jpg   hero photo (ProfileButDark.jpg / Hover.jpg / HoverButDark.jpg are the
 ProfileButDark.jpg   dark-mode and hover variants, cross-faded with CSS opacity)
@@ -49,7 +52,23 @@ php -S localhost:8000
 The contact form needs network access to a live EmailJS account, so it can't be
 verified offline.
 
+## Editing content
+
+Open `admin.html` (or click the small gear in the site footer). The admin asks for a
+password first; this is a client-side convenience lock, not real server security.
+Edits are saved to `localStorage` as you go, so you can refresh without losing work.
+When you're happy with the changes:
+
+1. Click **Export content.js**.
+2. Replace the repo's `content.js` with the downloaded file.
+3. Commit the change.
+
+Uploaded avatars and logos are resized and embedded as base64 data URLs inside
+`content.js`. **Reset draft** discards browser-only changes and reloads the
+committed file.
+
 ## Notes for contributors
 
-Retired projects and sections are kept as commented-out HTML rather than deleted, so
-they can be restored later. Please follow that pattern.
+Retired fallback projects and sections are kept as commented-out HTML rather than
+deleted. To retire something on the live site, remove it from `content.js` (or the
+admin) and commit.
