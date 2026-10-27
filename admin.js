@@ -69,6 +69,8 @@
                         : [],
                     link: text(project.link),
                     linkLabel: text(project.linkLabel),
+                    repo: text(project.repo),
+                    repoLabel: text(project.repoLabel),
                     contributors: Array.isArray(project.contributors)
                         ? project.contributors.map(String)
                         : []
@@ -456,6 +458,8 @@
         $("projectForm").reset();
         $("projectId").value = "";
         $("projectIcon").value = DEFAULT_ICON;
+        $("projectRepo").value = "";
+        $("projectRepoLabel").value = "";
         $("projectFormTitle").textContent = "New project";
 
         renderProjectContributors([]);
@@ -479,6 +483,8 @@
         $("projectTech").value = project.tech.join(", ");
         $("projectLink").value = project.link;
         $("projectLinkLabel").value = project.linkLabel;
+        $("projectRepo").value = project.repo || "";
+        $("projectRepoLabel").value = project.repoLabel || "";
         $("projectFormTitle").textContent = "Edit project";
 
         renderProjectContributors(project.contributors);
@@ -526,6 +532,8 @@
             tech: splitTags($("projectTech").value),
             link: $("projectLink").value.trim(),
             linkLabel: $("projectLinkLabel").value.trim(),
+            repo: $("projectRepo").value.trim(),
+            repoLabel: $("projectRepoLabel").value.trim(),
             contributors: readCheckedContributors()
         };
 

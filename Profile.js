@@ -240,6 +240,27 @@ function buildProjectCard(project, peopleById) {
         card.appendChild(button);
     }
 
+    const repoHref = safeHref(project.repo);
+    const repoLabel = contentText(project.repoLabel) || "View Repository";
+
+    if (repoHref) {
+        const repoBtn = document.createElement("a");
+        const repoIcon = document.createElement("i");
+
+        repoBtn.className = "project-button";
+        repoBtn.href = repoHref;
+        repoBtn.target = "_blank";
+        repoBtn.rel = "noopener";
+
+        repoBtn.appendChild(document.createTextNode(repoLabel));
+
+        repoIcon.className = "fab fa-github";
+
+        repoBtn.appendChild(repoIcon);
+
+        card.appendChild(repoBtn);
+    }
+
     return card;
 }
 
