@@ -434,8 +434,24 @@ function renderLogosContent(content) {
     });
 }
 
+function loadSiteContent() {
+    try {
+        const draft = localStorage.getItem("siteContentDraft");
+        if (draft) {
+            const parsed = JSON.parse(draft);
+            if (parsed && typeof parsed === "object") {
+                return parsed;
+            }
+        }
+    } catch (error) {
+        // Ignore draft load errors and fall back to embedded content.
+    }
+
+    return window.SITE_CONTENT;
+}
+
 function renderSiteContent() {
-    const content = window.SITE_CONTENT;
+    const content = loadSiteContent();
 
     if (!content || typeof content !== "object") return;
 
