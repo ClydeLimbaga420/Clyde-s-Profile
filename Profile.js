@@ -435,16 +435,20 @@ function renderLogosContent(content) {
 }
 
 function loadSiteContent() {
-    try {
-        const draft = localStorage.getItem("siteContentDraft");
-        if (draft) {
-            const parsed = JSON.parse(draft);
-            if (parsed && typeof parsed === "object") {
-                return parsed;
+    const isPreview = new URLSearchParams(window.location.search).get("preview") === "draft";
+
+    if (isPreview) {
+        try {
+            const draft = localStorage.getItem("siteContentDraft");
+            if (draft) {
+                const parsed = JSON.parse(draft);
+                if (parsed && typeof parsed === "object") {
+                    return parsed;
+                }
             }
+        } catch (error) {
+            // Ignore draft load errors and fall back to embedded content.
         }
-    } catch (error) {
-        // Ignore draft load errors and fall back to embedded content.
     }
 
     return window.SITE_CONTENT;
