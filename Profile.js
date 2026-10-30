@@ -800,6 +800,12 @@ function toggleMusic() {
 }
 
 // SEASONAL PARTICLE EFFECTS
+function isHalloween(date = new Date()) {
+    const month = date.getMonth(); // 0 = Jan
+    const day = date.getDate();
+    return (month === 9 && day === 31) || (month === 10 && day <= 2);
+}
+
 function getSeason(date = new Date()) {
     const month = date.getMonth(); // 0 = Jan
     if (month === 11 || month <= 1) return "winter";
@@ -814,6 +820,51 @@ const SEASON_CONFIG = {
     autumn: { symbols: ["🍁", "🍂"], count: 4, interval: 3000, minSize: 14, maxSize: 24, minDuration: 7, maxDuration: 14 },
     summer: { symbols: ["✨"], count: 5, minSize: 6, maxSize: 12, minDuration: 4, maxDuration: 7, firefly: true }
 };
+
+const HALLOWEEN_CONFIG = {
+    symbols: ["🦇", "🎃", "👻", "🕸"],
+    count: 5,
+    interval: 2400,
+    minSize: 14,
+    maxSize: 26,
+    minDuration: 8,
+    maxDuration: 15
+};
+
+function startHalloweenDecor() {
+    if (document.getElementById("halloweenDecor")) return;
+
+    const decor = document.createElement("div");
+    decor.id = "halloweenDecor";
+    decor.setAttribute("aria-hidden", "true");
+
+    const web = `
+        <svg viewBox="0 0 200 200" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M0 0 L200 0 M0 0 L184.8 76.5 M0 0 L141.4 141.4 M0 0 L76.5 184.8 M0 0 L0 200" />
+                <path d="M40 0 A40 40 0 0 1 0 40" />
+                <path d="M80 0 A80 80 0 0 1 0 80" />
+                <path d="M120 0 A120 120 0 0 1 0 120" />
+                <path d="M160 0 A160 160 0 0 1 0 160" />
+                <path d="M200 0 A200 200 0 0 1 0 200" />
+            </g>
+        </svg>`;
+
+    decor.innerHTML = `
+        <div class="halloween-web web-tl">${web}</div>
+        <div class="halloween-web web-tr">${web}</div>
+        <div class="halloween-web web-bl">${web}</div>
+        <div class="halloween-web web-br">${web}</div>
+        <span class="halloween-spider">🕷</span>
+        <span class="halloween-bat bat-1">🦇</span>
+        <span class="halloween-bat bat-2">🦇</span>
+        <span class="halloween-bat bat-3">🦇</span>
+        <div class="halloween-pumpkin pumpkin-left"></div>
+        <div class="halloween-pumpkin pumpkin-right"></div>
+    `;
+
+    document.body.appendChild(decor);
+}
 
 function spawnParticle(config) {
     const el = document.createElement("span");
@@ -844,6 +895,18 @@ function spawnParticle(config) {
 }
 
 function startSeasonalEffect() {
+    if (isHalloween()) {
+        document.body.classList.add("season-halloween");
+        startHalloweenDecor();
+
+        const halloween = HALLOWEEN_CONFIG;
+        for (let i = 0; i < halloween.count; i++) {
+            setTimeout(() => spawnParticle(halloween), Math.random() * 3000);
+        }
+        setInterval(() => spawnParticle(halloween), halloween.interval);
+        return;
+    }
+
     const season = getSeason();
     document.body.classList.toggle("season-summer", season === "summer");
 
