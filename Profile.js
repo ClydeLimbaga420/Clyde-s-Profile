@@ -264,6 +264,78 @@ function buildProjectCard(project, peopleById) {
     return card;
 }
 
+const CARDS_PER_PAGE = 6;
+
+function setupGridPagination(grid, cards, key) {
+    const existing = document.querySelector(
+        '.grid-nav[data-for="' + key + '"]'
+    );
+
+    if (existing) existing.remove();
+
+    const totalPages = Math.ceil(cards.length / CARDS_PER_PAGE);
+
+    if (totalPages <= 1) return;
+
+    let page = 0;
+
+    const nav = document.createElement("div");
+    const prev = document.createElement("button");
+    const status = document.createElement("span");
+    const next = document.createElement("button");
+
+    nav.className = "grid-nav";
+    nav.dataset.for = key;
+    nav.setAttribute("aria-label", "Project pages");
+
+    prev.type = "button";
+    prev.className = "grid-nav-button";
+    prev.setAttribute("aria-label", "Previous projects");
+    prev.innerHTML = '<i class="fas fa-chevron-left"></i>';
+
+    status.className = "grid-nav-status";
+
+    next.type = "button";
+    next.className = "grid-nav-button";
+    next.setAttribute("aria-label", "Next projects");
+    next.innerHTML = '<i class="fas fa-chevron-right"></i>';
+
+    function update() {
+        cards.forEach((card, index) => {
+            card.classList.toggle(
+                "is-hidden",
+                Math.floor(index / CARDS_PER_PAGE) !== page
+            );
+        });
+
+        status.textContent = (page + 1) + " / " + totalPages;
+        prev.disabled = page === 0;
+        next.disabled = page === totalPages - 1;
+    }
+
+    prev.addEventListener("click", () => {
+        if (page === 0) return;
+
+        page--;
+        update();
+    });
+
+    next.addEventListener("click", () => {
+        if (page === totalPages - 1) return;
+
+        page++;
+        update();
+    });
+
+    nav.appendChild(prev);
+    nav.appendChild(status);
+    nav.appendChild(next);
+
+    grid.parentNode.insertBefore(nav, grid.nextSibling);
+
+    update();
+}
+
 function renderProjectsContent(content) {
     const projects = Array.isArray(content.projects) ? content.projects : [];
     const people = Array.isArray(content.people) ? content.people : [];
@@ -281,25 +353,25 @@ function renderProjectsContent(content) {
     if (featuredGrid) {
         featuredGrid.innerHTML = "";
 
-        projects
+        const featuredCards = projects
             .filter(project => project.section !== "academic")
-            .forEach(project => {
-                featuredGrid.appendChild(
-                    buildProjectCard(project, peopleById)
-                );
-            });
+            .map(project => buildProjectCard(project, peopleById));
+
+        featuredCards.forEach(card => featuredGrid.appendChild(card));
+
+        setupGridPagination(featuredGrid, featuredCards, "projectsGrid");
     }
 
     if (academicGrid) {
         academicGrid.innerHTML = "";
 
-        projects
+        const academicCards = projects
             .filter(project => project.section === "academic")
-            .forEach(project => {
-                academicGrid.appendChild(
-                    buildProjectCard(project, peopleById)
-                );
-            });
+            .map(project => buildProjectCard(project, peopleById));
+
+        academicCards.forEach(card => academicGrid.appendChild(card));
+
+        setupGridPagination(academicGrid, academicCards, "academicGrid");
     }
 }
 

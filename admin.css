@@ -275,6 +275,11 @@ textarea {
     line-height: 1.5;
 }
 
+.panel-hint a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
 .item-list {
     display: flex;
     flex-direction: column;
@@ -561,6 +566,73 @@ textarea {
 
 .social-row input:focus {
     border-color: var(--accent);
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal-card {
+    width: min(560px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.modal-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.modal-head h2 {
+    font-size: 1.05rem;
+    letter-spacing: -0.3px;
+}
+
+.modal-head code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: var(--surface-soft);
+    font-size: 0.75rem;
+}
+
+.modal-card .form-actions {
+    flex-wrap: wrap;
+}
+
+.publish-status {
+    min-height: 1.2em;
+    margin: 14px 0 0;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+.publish-status.error {
+    color: #dc2626;
+}
+
+.publish-status.success {
+    color: #16a34a;
 }
 
 .toast {

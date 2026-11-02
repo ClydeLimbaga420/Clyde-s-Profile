@@ -73,8 +73,8 @@
             </a>
 
             <p>
-                Edit content here, then download <code>content.js</code>
-                and replace the file in your repo.
+                Edit content here, then publish it straight to GitHub.
+                Netlify redeploys the site after the commit.
             </p>
 
         </div>
@@ -113,9 +113,14 @@
                    accept=".js,.json,application/json,text/javascript"
                    hidden>
 
-            <button id="exportBtn" class="btn primary" type="button">
+            <button id="exportBtn" class="btn ghost" type="button">
                 <i class="fas fa-download"></i>
                 Export content.js
+            </button>
+
+            <button id="publishBtn" class="btn primary" type="button">
+                <i class="fas fa-cloud-arrow-up"></i>
+                Publish
             </button>
 
         </div>
@@ -620,6 +625,109 @@
 </section>
 
 </main>
+
+<div class="modal" id="publishModal" hidden>
+
+    <div class="modal-card"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="publishTitle">
+
+        <div class="modal-head">
+
+            <div>
+                <h2 id="publishTitle">Publish to GitHub</h2>
+                <p class="panel-hint">
+                    Commits <code>content.js</code> to your repo.
+                    Netlify redeploys the site automatically after the commit.
+                </p>
+            </div>
+
+            <button id="publishClose"
+                    class="icon-btn"
+                    type="button"
+                    aria-label="Close publish dialog">
+                <i class="fas fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <form id="publishForm" class="editor-form">
+
+            <label>
+                GitHub token
+                <input id="publishToken"
+                       type="password"
+                       autocomplete="off"
+                       placeholder="github_pat_..."
+                       required>
+            </label>
+
+            <div class="form-row">
+
+                <label>
+                    Repository
+                    <input id="publishRepo"
+                           type="text"
+                           placeholder="owner/repo"
+                           required>
+                </label>
+
+                <label>
+                    Branch
+                    <input id="publishBranch"
+                           type="text"
+                           placeholder="main"
+                           required>
+                </label>
+
+            </div>
+
+            <label>
+                File path
+                <input id="publishPath"
+                       type="text"
+                       placeholder="content.js"
+                       required>
+            </label>
+
+            <p class="panel-hint">
+                Use a fine-grained token with
+                <strong>Contents: Read and write</strong> access to this repo.
+                <a href="https://github.com/settings/tokens?type=beta"
+                   target="_blank"
+                   rel="noopener">Create a token</a>.
+                It is stored only in this browser. Use
+                <strong>Forget token</strong> on a shared computer.
+            </p>
+
+            <div class="form-actions">
+
+                <button id="publishSubmit" class="btn primary" type="submit">
+                    <i class="fas fa-cloud-arrow-up"></i>
+                    Publish now
+                </button>
+
+                <button id="publishCancel" class="btn ghost" type="button">
+                    Cancel
+                </button>
+
+                <button id="publishForget" class="btn ghost" type="button">
+                    Forget token
+                </button>
+
+            </div>
+
+        </form>
+
+        <p class="publish-status"
+           id="publishStatus"
+           role="status"
+           aria-live="polite"></p>
+
+    </div>
+
+</div>
 
 <datalist id="iconOptions">
     <option value="fas fa-code"></option>

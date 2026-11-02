@@ -463,6 +463,62 @@ body.darkmode .hero-photo:hover .dark-hover-photo {
     gap: 20px;
 }
 
+.projects-grid > .is-hidden,
+.academic-grid > .is-hidden {
+    display: none;
+}
+
+.grid-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 32px;
+}
+
+.grid-nav-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.grid-nav-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.grid-nav-button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.grid-nav-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.grid-nav-status {
+    min-width: 54px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
 .project-card {
     display: flex;
     flex-direction: column;

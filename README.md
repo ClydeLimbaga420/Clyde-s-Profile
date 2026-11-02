@@ -13,7 +13,8 @@ Repo: <https://github.com/ClydeLimbaga420/Clyde-s-Profile>
 - **Birthday countdown** — live days/hours/minutes/seconds, with confetti on the day
 - **Random greeting** — the hero says hi in a different language on each visit
 - **Contact form** — sends through EmailJS with success/error toasts
-- **Content admin** — add/edit projects, people, contacts, and logos in `admin.html`; preview changes in the browser and export `content.js` to commit
+- **Content admin** — add/edit projects, people, contacts, and logos in `admin.html`; preview changes in the browser, then publish straight to GitHub or export `content.js`
+- **Project pagination** — Featured and Academic grids show six cards per page with previous/next arrows when there are more
 - Smooth-scroll navigation, mobile hamburger menu, and responsive breakpoints at 900px / 700px / 400px
 
 ## Stack
@@ -59,10 +60,14 @@ password first; this is a client-side convenience lock, not real server security
 Edits are saved to `localStorage` as you go, so you can refresh without losing work.
 When you're happy with the changes:
 
-1. Click **Export content.js**.
-2. Replace the repo's `content.js` with the downloaded file.
-3. Commit the change.
+1. Click **Publish**.
+2. Paste a GitHub fine-grained token with **Contents: Read and write** access to
+   `ClydeLimbaga420/Clyde-s-Profile`. It is stored only in that browser; use
+   **Forget token** on a shared computer.
+3. Click **Publish now**. The admin commits `content.js` through the GitHub API,
+   and Netlify redeploys automatically.
 
+**Export content.js** still downloads a copy if you prefer to commit manually.
 Uploaded avatars and logos are resized and embedded as base64 data URLs inside
 `content.js`. **Reset draft** discards browser-only changes and reloads the
 committed file.
@@ -71,4 +76,4 @@ committed file.
 
 Retired fallback projects and sections are kept as commented-out HTML rather than
 deleted. To retire something on the live site, remove it from `content.js` (or the
-admin) and commit.
+admin) and publish or commit.
