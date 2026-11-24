@@ -47,6 +47,6 @@ There is no package manager, build, test, lint, or formatter. `package.json`, CI
 - **`#academic` (`index.html:497`) is absent from the nav** (`index.html:38-45`). It looks like an oversight, but confirm with the owner before changing it.
 - **Inline `onclick=` handlers call globals** declared in `Profile.js` (e.g. `toggleDarkMode`, `toggleMenu`, `toggleMusic`, `closeEmailToast`). Do not convert `Profile.js` to a module — that silently kills every button.
 - **Mobile nav depends on JS**: `Profile.js:454-464` closes `#navMenu` on link click. The menu button only toggles the `active` class; there is no CSS-only fallback.
-- **Do not add `autoplay` to `#bgMusic`** — browsers block it, which is why playback starts from `toggleMusic()`.
+- **Music autoplay is attempted in JS, not with the HTML `autoplay` attribute** — `startMusic()` runs on load; if the browser blocks it, a one-time pointer/key listener retries on the first interaction. `syncMusicWithTheme()` swaps `music/lightFantasy.mp3` and `music/darkFantasy.mp3` whenever the theme changes.
 - CDNs are pinned by version (Font Awesome 6.4.0, `@emailjs/browser@4`, Google Fonts `Inter`) with no SRI hashes. Keep them pinned.
-- **Binaries are committed directly and are large**: `music.mp3` (4.1 MB), `Logo.png` (965 KB), plus four JPGs. There is no asset pipeline. With no `.gitignore`, avoid `git add -A`.
+- **Binaries are committed directly and are large**: `Logo.png` (965 KB) plus four JPGs; `music/` holds the two theme tracks you add. There is no asset pipeline. Avoid `git add -A`.

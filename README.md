@@ -8,7 +8,7 @@ Repo: <https://github.com/ClydeLimbaga420/Clyde-s-Profile>
 ## Features
 
 - **Dark mode** — moon/sun toggle, remembers the choice in `localStorage`
-- **Background music** — user-toggled player with a spinning disc animation
+- **Background music** — theme-linked tracks (`lightFantasy.mp3` / `darkFantasy.mp3`), autoplay attempted on load with a first-interaction fallback, spinning disc animation
 - **Seasonal effects** — falling snow/petals/leaves or summer fireflies, derived from the current month; in summer the hero photo morphs into a rotating sun
 - **Birthday countdown** — live days/hours/minutes/seconds, with confetti on the day
 - **Random greeting** — the hero says hi in a different language on each visit
@@ -37,7 +37,7 @@ Profile.jpg   hero photo (ProfileButDark.jpg / Hover.jpg / HoverButDark.jpg are 
 ProfileButDark.jpg   dark-mode and hover variants, cross-faded with CSS opacity)
 Hover.jpg
 HoverButDark.jpg
-music.mp3     "Sway" — Bic Runga
+music/        lightFantasy.mp3 and darkFantasy.mp3, switched with dark mode
 emailjs_template.html   mockup of the EmailJS message body, for reference only
 likes.php / likes.db    SQLite like counter — not currently wired into the site
 ```

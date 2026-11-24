@@ -9,6 +9,12 @@ function toggleDarkMode() {
     }
 
     localStorage.setItem("darkmode", isDark);
+
+    syncMusicWithTheme();
+
+    if (musicWanted) {
+        startMusic();
+    }
 }
 
 function toggleMenu() {
@@ -749,6 +755,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     renderSiteContent();
 
+    syncMusicWithTheme();
+    startMusic();
+
     calculateAge();
     updateBirthdayCountdown();
     setRandomGreeting();
@@ -1033,36 +1042,111 @@ setInterval(updateBirthdayCountdown, 1000);
 const bgMusic = document.getElementById("bgMusic");
 const musicButton = document.getElementById("musicButton");
 const musicDisc = document.getElementById("musicDisc");
+const musicTitle = document.getElementById("musicTitle");
 
-function toggleMusic() {
-    if (!bgMusic || !musicButton || !musicDisc) {
+const MUSIC_TRACKS = {
+    light: { src: "music/lightFantasy.mp3", title: "Light Fantasy" },
+    dark: { src: "music/darkFantasy.mp3", title: "Dark Fantasy" }
+};
+
+let musicWanted = true;
+let musicGestureArmed = false;
+
+function musicThemeKey() {
+    return document.body.classList.contains("darkmode") ? "dark" : "light";
+}
+
+function updateMusicControls(isPlaying) {
+    if (!musicButton || !musicDisc) return;
+
+    musicButton.innerHTML = isPlaying
+        ? '<i class="fas fa-pause"></i>'
+        : '<i class="fas fa-play"></i>';
+
+    musicButton.setAttribute(
+        "aria-label",
+        isPlaying ? "Pause music" : "Play music"
+    );
+
+    musicDisc.classList.toggle("playing", isPlaying);
+}
+
+function syncMusicWithTheme() {
+    if (!bgMusic) return;
+
+    const track = MUSIC_TRACKS[musicThemeKey()];
+
+    if (bgMusic.dataset.track !== track.src) {
+        bgMusic.dataset.track = track.src;
+        bgMusic.src = track.src;
+        bgMusic.load();
+    }
+
+    if (musicTitle) {
+        musicTitle.textContent = track.title;
+    }
+}
+
+function disarmMusicGesture() {
+    if (!musicGestureArmed) return;
+
+    document.removeEventListener("pointerdown", startMusicOnGesture);
+    document.removeEventListener("keydown", startMusicOnGesture);
+
+    musicGestureArmed = false;
+}
+
+function startMusicOnGesture(event) {
+    if (musicButton && event && event.target && musicButton.contains(event.target)) {
         return;
     }
 
-    if (bgMusic.paused) {
-        bgMusic.play();
+    disarmMusicGesture();
+    startMusic();
+}
 
-        musicButton.innerHTML =
-            '<i class="fas fa-pause"></i>';
+function armMusicGesture() {
+    if (musicGestureArmed) return;
 
-        musicButton.setAttribute(
-            "aria-label",
-            "Pause music"
-        );
+    musicGestureArmed = true;
+    document.addEventListener("pointerdown", startMusicOnGesture);
+    document.addEventListener("keydown", startMusicOnGesture);
+}
 
-        musicDisc.classList.add("playing");
+function startMusic() {
+    if (!bgMusic || !musicButton || !musicDisc) return;
+
+    musicWanted = true;
+    syncMusicWithTheme();
+
+    const attempt = bgMusic.play();
+
+    if (attempt && typeof attempt.catch === "function") {
+        attempt
+            .then(() => {
+                disarmMusicGesture();
+                updateMusicControls(true);
+            })
+            .catch(() => {
+                updateMusicControls(false);
+                armMusicGesture();
+            });
     } else {
+        disarmMusicGesture();
+        updateMusicControls(true);
+    }
+}
+
+function toggleMusic() {
+    if (!bgMusic || !musicButton || !musicDisc) return;
+
+    if (bgMusic.paused) {
+        startMusic();
+    } else {
+        musicWanted = false;
+        disarmMusicGesture();
         bgMusic.pause();
-
-        musicButton.innerHTML =
-            '<i class="fas fa-play"></i>';
-
-        musicButton.setAttribute(
-            "aria-label",
-            "Play music"
-        );
-
-        musicDisc.classList.remove("playing");
+        updateMusicControls(false);
     }
 }
 
