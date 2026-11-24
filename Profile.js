@@ -375,6 +375,200 @@ function renderProjectsContent(content) {
     }
 }
 
+const CERTIFICATES_PER_VIEW = 5;
+const CERTIFICATE_AUTOSCROLL_MS = 4500;
+
+let certificateAutoTimer = null;
+
+function certificateTitle(entry, index) {
+    if (typeof entry === "string") {
+        const filename = entry.split(/[\\/]/).pop() || entry;
+
+        return filename
+            .replace(/\.[^.]+$/, "")
+            .replace(/[-_]+/g, " ")
+            .trim() || "Certificate " + (index + 1);
+    }
+
+    return contentText(entry.title) || "Certificate " + (index + 1);
+}
+
+function isCertificatePdf(source) {
+    return /\.pdf(?:[?#].*)?$/i.test(source);
+}
+
+function buildCertificateImage(entry, index) {
+    const data = entry && typeof entry === "object" ? entry : {};
+    const imagePath = typeof entry === "string" ? entry : contentText(data.image);
+    const imageSrc = safeImageSrc(imagePath);
+    const credentialUrl = safeHref(data.url);
+    const title = certificateTitle(entry, index);
+
+    if (imageSrc && !isCertificatePdf(imageSrc)) {
+        const image = document.createElement("img");
+
+        image.src = imageSrc;
+        image.alt = title;
+        image.loading = "lazy";
+
+        return image;
+    }
+
+    const target = credentialUrl || imageSrc;
+    const link = document.createElement(target ? "a" : "span");
+    const icon = document.createElement("i");
+
+    link.className = "certificate-link";
+
+    if (target) {
+        link.href = target;
+        link.target = "_blank";
+        link.rel = "noopener";
+    }
+
+    link.setAttribute("aria-label", "Open " + title);
+
+    icon.className = isCertificatePdf(imageSrc)
+        ? "fas fa-file-pdf"
+        : "fas fa-award";
+
+    link.appendChild(icon);
+
+    return link;
+}
+
+function setupCertificatesCarousel(track, cards) {
+    const existing = document.querySelector(".certificate-next");
+
+    if (existing) existing.remove();
+
+    if (certificateAutoTimer) {
+        clearInterval(certificateAutoTimer);
+        certificateAutoTimer = null;
+    }
+
+    if (cards.length <= CERTIFICATES_PER_VIEW) return;
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "certificate-next";
+    button.setAttribute("aria-label", "Next certificate");
+    button.innerHTML = '<i class="fas fa-chevron-right"></i>';
+
+    let index = 0;
+    let paused = false;
+    let scrollTimer = null;
+
+    const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    function cardOffset(position) {
+        return cards[position].offsetLeft - cards[0].offsetLeft;
+    }
+
+    function goTo(position) {
+        index = (position + cards.length) % cards.length;
+
+        track.scrollTo({
+            left: cardOffset(index),
+            behavior: reduceMotion ? "auto" : "smooth"
+        });
+    }
+
+    function startAuto() {
+        if (certificateAutoTimer) clearInterval(certificateAutoTimer);
+
+        if (reduceMotion) return;
+
+        certificateAutoTimer = setInterval(() => {
+            if (paused || document.hidden) return;
+
+            goTo(index + 1);
+        }, CERTIFICATE_AUTOSCROLL_MS);
+    }
+
+    button.addEventListener("click", () => {
+        goTo(index + 1);
+        startAuto();
+    });
+
+    [track, button].forEach(element => {
+        element.addEventListener("mouseenter", () => { paused = true; });
+        element.addEventListener("mouseleave", () => { paused = false; });
+        element.addEventListener("focusin", () => { paused = true; });
+        element.addEventListener("focusout", () => { paused = false; });
+    });
+
+    track.addEventListener("scroll", () => {
+        clearTimeout(scrollTimer);
+
+        scrollTimer = setTimeout(() => {
+            let closest = 0;
+            let best = Infinity;
+
+            cards.forEach((card, position) => {
+                const distance = Math.abs(
+                    cardOffset(position) - track.scrollLeft
+                );
+
+                if (distance < best) {
+                    best = distance;
+                    closest = position;
+                }
+            });
+
+            index = closest;
+        }, 120);
+    }, { passive: true });
+
+    track.parentNode.insertBefore(button, track.nextSibling);
+
+    startAuto();
+}
+
+function renderCertificatesContent(content) {
+    const track = document.getElementById("certificatesGrid");
+    const empty = document.getElementById("certificatesEmpty");
+
+    if (!track) return;
+
+    const entries = Array.isArray(window.CERTIFICATES)
+        ? window.CERTIFICATES
+        : (Array.isArray(content.certificates) ? content.certificates : []);
+
+    const certificates = entries.filter(entry => {
+        if (typeof entry === "string") return Boolean(entry.trim());
+
+        return Boolean(
+            entry &&
+            typeof entry === "object" &&
+            (entry.image || entry.url || entry.title)
+        );
+    });
+
+    track.innerHTML = "";
+
+    if (empty) empty.hidden = certificates.length > 0;
+
+    if (!certificates.length) {
+        setupCertificatesCarousel(track, []);
+        return;
+    }
+
+    const cards = certificates.map(buildCertificateImage);
+
+    cards.forEach(card => track.appendChild(card));
+
+    track.classList.toggle(
+        "is-carousel",
+        cards.length > CERTIFICATES_PER_VIEW
+    );
+
+    setupCertificatesCarousel(track, cards);
+}
+
 function renderSocialLinks(containerId, socials, placement) {
     const container = document.getElementById(containerId);
 
@@ -532,6 +726,7 @@ function renderSiteContent() {
     if (!content || typeof content !== "object") return;
 
     renderProjectsContent(content);
+    renderCertificatesContent(content);
     renderContactDetails(content);
     renderLogosContent(content);
 }

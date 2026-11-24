@@ -15,6 +15,7 @@ Repo: <https://github.com/ClydeLimbaga420/Clyde-s-Profile>
 - **Contact form** — sends through EmailJS with success/error toasts
 - **Content admin** — add/edit projects, people, contacts, and logos in `admin.html`; preview changes in the browser, then publish straight to GitHub or export `content.js`
 - **Project pagination** — Featured and Academic grids show six cards per page with previous/next arrows when there are more
+- **Certificates gallery** — certificate files live in `certs/`; beyond five cards the row scrolls horizontally with arrows and auto-advance
 - Smooth-scroll navigation, mobile hamburger menu, and responsive breakpoints at 900px / 700px / 400px
 
 ## Stack
@@ -27,6 +28,7 @@ dependencies: Google Fonts (Inter), Font Awesome 6.4.0, and `@emailjs/browser@4`
 ```
 index.html    page shell; hardcoded cards are a no-JS fallback
 content.js    source of truth for projects, people, contacts, and logos
+certs/        certificate files plus certificates.js, the list the gallery renders
 admin.html    browser content editor (also admin.css / admin.js)
 Profile.css   all styling, dark mode tokens in :root / .darkmode
 Profile.js    content rendering, theme toggle, music, EmailJS, countdown, particles
