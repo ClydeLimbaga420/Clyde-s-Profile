@@ -20,6 +20,7 @@
 
     let state = draft ? normalize(draft) : deepClone(embedded);
     let editing = { project: null, person: null, logo: null };
+    let pendingProjectImage = "";
     let pendingPersonImage = "";
     let pendingLogoImage = "";
     let saveTimer = null;
@@ -71,6 +72,7 @@
                     type: text(project.type),
                     status: text(project.status),
                     description: text(project.description),
+                    image: text(project.image),
                     tech: Array.isArray(project.tech)
                         ? project.tech.map(text).filter(Boolean)
                         : [],
@@ -469,6 +471,9 @@
         $("projectRepoLabel").value = "";
         $("projectFormTitle").textContent = "New project";
 
+        pendingProjectImage = "";
+        updateProjectPreview();
+
         renderProjectContributors([]);
         renderProjectList();
     }
@@ -487,6 +492,11 @@
         $("projectStatus").value = project.status;
         $("projectIcon").value = project.icon;
         $("projectDescription").value = project.description;
+        pendingProjectImage = project.image;
+        $("projectImageUrl").value = /^data:image\//i.test(project.image)
+            ? ""
+            : project.image;
+        updateProjectPreview();
         $("projectTech").value = project.tech.join(", ");
         $("projectLink").value = project.link;
         $("projectLinkLabel").value = project.linkLabel;
@@ -536,6 +546,7 @@
             type: $("projectType").value.trim(),
             status: $("projectStatus").value.trim(),
             description: $("projectDescription").value.trim(),
+            image: pendingProjectImage,
             tech: splitTags($("projectTech").value),
             link: $("projectLink").value.trim(),
             linkLabel: $("projectLinkLabel").value.trim(),
@@ -840,6 +851,10 @@
             row.appendChild(remove);
             wrap.appendChild(row);
         });
+    }
+
+    function updateProjectPreview() {
+        setPreview("projectImagePreview", pendingProjectImage, "Project picture preview");
     }
 
     function updatePersonPreview() {
@@ -1406,6 +1421,38 @@
 
                 scheduleSave();
             });
+        });
+
+        $("projectImageUrl").addEventListener("input", event => {
+            const value = event.target.value.trim();
+
+            if (/^data:image\//i.test(value)) return;
+
+            pendingProjectImage = value;
+            updateProjectPreview();
+        });
+
+        $("projectImageFile").addEventListener("change", async event => {
+            const file = event.target.files && event.target.files[0];
+
+            if (!file) return;
+
+            try {
+                pendingProjectImage = await resizeImage(file, 800);
+                $("projectImageUrl").value = "";
+                updateProjectPreview();
+                toast("Project picture ready. Click Save project.");
+            } catch (error) {
+                toast(error.message || "Could not process that image.", "error");
+            }
+
+            event.target.value = "";
+        });
+
+        $("projectImageClear").addEventListener("click", () => {
+            pendingProjectImage = "";
+            $("projectImageUrl").value = "";
+            updateProjectPreview();
         });
 
         $("personImageUrl").addEventListener("input", event => {

@@ -101,6 +101,78 @@ function buildPersonCard(person) {
     return member;
 }
 
+let projectPreviewListenerAttached = false;
+
+function closeProjectPreviews(except) {
+    document.querySelectorAll(".has-preview.is-preview-open").forEach(card => {
+        if (card !== except) {
+            card.classList.remove("is-preview-open");
+        }
+    });
+}
+
+function setupProjectPreview(card, project, title) {
+    const imageSrc = safeImageSrc(project.image);
+
+    if (!imageSrc) return;
+
+    const preview = document.createElement("div");
+    const image = document.createElement("img");
+    const caption = document.createElement("span");
+
+    card.classList.add("has-preview");
+    card.tabIndex = 0;
+
+    preview.className = "project-preview";
+    preview.setAttribute("aria-hidden", "true");
+
+    image.src = imageSrc;
+    image.alt = "";
+    image.loading = "lazy";
+
+    caption.className = "project-preview-caption";
+    caption.textContent = title;
+
+    preview.appendChild(image);
+    preview.appendChild(caption);
+    card.appendChild(preview);
+
+    function toggle() {
+        const open = !card.classList.contains("is-preview-open");
+
+        closeProjectPreviews(card);
+        card.classList.toggle("is-preview-open", open);
+    }
+
+    card.addEventListener("click", event => {
+        if (event.target.closest("a, button")) return;
+
+        toggle();
+    });
+
+    card.addEventListener("keydown", event => {
+        if (event.target !== card) return;
+        if (event.key !== "Enter" && event.key !== " ") return;
+
+        event.preventDefault();
+        toggle();
+    });
+
+    if (!projectPreviewListenerAttached) {
+        projectPreviewListenerAttached = true;
+
+        document.addEventListener("click", event => {
+            if (!event.target.closest(".has-preview")) {
+                closeProjectPreviews();
+            }
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") closeProjectPreviews();
+        });
+    }
+}
+
 function buildProjectCard(project, peopleById) {
     const isAcademic = project.section === "academic";
     const card = document.createElement("article");
@@ -266,6 +338,8 @@ function buildProjectCard(project, peopleById) {
 
         card.appendChild(repoBtn);
     }
+
+    setupProjectPreview(card, project, title.textContent);
 
     return card;
 }

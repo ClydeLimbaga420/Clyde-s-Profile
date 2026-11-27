@@ -251,6 +251,32 @@
                               placeholder="What does it do?"></textarea>
                 </label>
 
+                <div class="image-field">
+
+                    <label>
+                        Project picture URL
+                        <input id="projectImageUrl"
+                               type="text"
+                               placeholder="https://... or screenshot.png">
+                    </label>
+
+                    <label class="file-label">
+                        Upload picture
+                        <input id="projectImageFile"
+                               type="file"
+                               accept="image/*">
+                    </label>
+
+                    <div class="image-preview wide" id="projectImagePreview"></div>
+
+                    <button id="projectImageClear"
+                            class="btn small ghost"
+                            type="button">
+                        Remove picture
+                    </button>
+
+                </div>
+
                 <label>
                     Tech tags
                     <input id="projectTech"

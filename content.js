@@ -15,6 +15,7 @@ window.SITE_CONTENT = {
             "type": "Web Application",
             "status": "",
             "description": "A system designed to allow users to request help in their selected location.",
+            "image": "",
             "tech": [
                 "Web",
                 "Database",
@@ -34,6 +35,7 @@ window.SITE_CONTENT = {
             "type": "Web Application",
             "status": "",
             "description": "A simple anime watchlist created for anime fans to organize and keep track of the shows they watch.",
+            "image": "",
             "tech": [
                 "HTML",
                 "CSS",
@@ -54,6 +56,7 @@ window.SITE_CONTENT = {
             "type": "Development",
             "status": "Personal",
             "description": "A responsive portfolio website showcasing my projects, skills, education, and current learning journey.",
+            "image": "",
             "tech": [
                 "HTML",
                 "CSS",
@@ -73,6 +76,7 @@ window.SITE_CONTENT = {
             "type": "Game Development",
             "status": "Personal",
             "description": "Monster X Hunter is a 2D monster-hunting RPG where you explore a living overworld of quiet towns and wild forests teeming with creatures to discover. Track down and battle wild monsters in fast-paced, real-time combat, then take on powerful bosses to prove your skill as a hunter. Along the way you'll grow your team, complete your quest, and have your progress saved so your adventure is always ready to continue.",
+            "image": "",
             "tech": [
                 "Python"
             ],
@@ -90,6 +94,7 @@ window.SITE_CONTENT = {
             "type": "Voice Assistant",
             "status": "",
             "description": "A lightweight, locally running Python voice assistant for Windows. Control your computer using your microphone to open applications, launch websites, and search Google.",
+            "image": "",
             "tech": [
                 "Python",
                 "Vosk"
@@ -108,6 +113,7 @@ window.SITE_CONTENT = {
             "type": "Academic System",
             "status": "Deployed",
             "description": "An inventory and borrowing management system developed to make it easier to track school equipment, peripherals, reservations, and borrowed items.",
+            "image": "",
             "tech": [
                 "C#",
                 ".NET MAUI",
@@ -135,6 +141,7 @@ window.SITE_CONTENT = {
             "type": "Academic Project",
             "status": "Deployed",
             "description": "An interactive hazard-mapping simulation covering 25 Philippine volcanoes, rendered over live satellite imagery. Models PHIVOLCS-style alert levels, earthquake magnitude, and wind-driven ash plumes using an inverse-square/exponential damage model and a physically-based Gaussian plume that shifts and elongates with wind speed. Live stats (hazard zone size, ash-fall area, max downwind reach) update as you adjust the controls.",
+            "image": "",
             "tech": [
                 "Python",
                 "Streamlit",
@@ -161,6 +168,7 @@ window.SITE_CONTENT = {
             "type": "Academic Project",
             "status": "Deployed",
             "description": "A Webapp for Barangays to manage the information of their residents, including personal details, household information, Blotter Files, Certificate Maker, and other relevant data. It streamlines the process of record-keeping and improves accessibility for local government units.",
+            "image": "",
             "tech": [
                 "HTML",
                 "JavaScript",
@@ -187,6 +195,7 @@ window.SITE_CONTENT = {
             "type": "Network Tracker",
             "status": "Deployed",
             "description": "It provides real-time network statistics, internet connectivity checks, bandwidth monitoring, and active LAN device discovery.",
+            "image": "",
             "tech": [
                 "Python",
                 "Flask",
