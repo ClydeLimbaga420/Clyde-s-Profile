@@ -455,7 +455,6 @@ function renderProjectsContent(content) {
     }
 }
 
-const CERTIFICATES_PER_VIEW = 5;
 const CERTIFICATE_AUTOSCROLL_MS = 4500;
 
 let certificateAutoTimer = null;
@@ -518,23 +517,33 @@ function buildCertificateImage(entry, index) {
 }
 
 function setupCertificatesCarousel(track, cards) {
-    const existing = document.querySelector(".certificate-next");
-
-    if (existing) existing.remove();
+    document.querySelectorAll(".certificate-nav").forEach(node => node.remove());
 
     if (certificateAutoTimer) {
         clearInterval(certificateAutoTimer);
         certificateAutoTimer = null;
     }
 
-    if (cards.length <= CERTIFICATES_PER_VIEW) return;
+    if (track._certificateScrollHandler) {
+        track.removeEventListener("scroll", track._certificateScrollHandler);
+        track._certificateScrollHandler = null;
+    }
 
-    const button = document.createElement("button");
+    if (cards.length <= 1) return;
 
-    button.type = "button";
-    button.className = "certificate-next";
-    button.setAttribute("aria-label", "Next certificate");
-    button.innerHTML = '<i class="fas fa-chevron-right"></i>';
+    const shell = track.parentNode;
+    const prev = document.createElement("button");
+    const next = document.createElement("button");
+
+    prev.type = "button";
+    prev.className = "certificate-nav certificate-prev";
+    prev.setAttribute("aria-label", "Previous certificate");
+    prev.innerHTML = '<i class="fas fa-chevron-left"></i>';
+
+    next.type = "button";
+    next.className = "certificate-nav certificate-next";
+    next.setAttribute("aria-label", "Next certificate");
+    next.innerHTML = '<i class="fas fa-chevron-right"></i>';
 
     let index = 0;
     let paused = false;
@@ -548,51 +557,49 @@ function setupCertificatesCarousel(track, cards) {
         return cards[position].offsetLeft - cards[0].offsetLeft;
     }
 
-    function goTo(position) {
+    function goTo(position, behavior) {
         index = (position + cards.length) % cards.length;
-
         track.scrollTo({
             left: cardOffset(index),
-            behavior: reduceMotion ? "auto" : "smooth"
+            behavior: behavior || (reduceMotion ? "auto" : "smooth")
         });
     }
 
     function startAuto() {
         if (certificateAutoTimer) clearInterval(certificateAutoTimer);
-
         if (reduceMotion) return;
 
         certificateAutoTimer = setInterval(() => {
             if (paused || document.hidden) return;
-
             goTo(index + 1);
         }, CERTIFICATE_AUTOSCROLL_MS);
     }
 
-    button.addEventListener("click", () => {
+    prev.addEventListener("click", () => {
+        goTo(index - 1);
+        startAuto();
+    });
+
+    next.addEventListener("click", () => {
         goTo(index + 1);
         startAuto();
     });
 
-    [track, button].forEach(element => {
+    [track, prev, next].forEach(element => {
         element.addEventListener("mouseenter", () => { paused = true; });
         element.addEventListener("mouseleave", () => { paused = false; });
         element.addEventListener("focusin", () => { paused = true; });
         element.addEventListener("focusout", () => { paused = false; });
     });
 
-    track.addEventListener("scroll", () => {
+    track._certificateScrollHandler = () => {
         clearTimeout(scrollTimer);
-
         scrollTimer = setTimeout(() => {
             let closest = 0;
             let best = Infinity;
 
             cards.forEach((card, position) => {
-                const distance = Math.abs(
-                    cardOffset(position) - track.scrollLeft
-                );
-
+                const distance = Math.abs(cardOffset(position) - track.scrollLeft);
                 if (distance < best) {
                     best = distance;
                     closest = position;
@@ -601,9 +608,12 @@ function setupCertificatesCarousel(track, cards) {
 
             index = closest;
         }, 120);
-    }, { passive: true });
+    };
 
-    track.parentNode.insertBefore(button, track.nextSibling);
+    track.addEventListener("scroll", track._certificateScrollHandler, { passive: true });
+
+    shell.insertBefore(prev, track);
+    shell.appendChild(next);
 
     startAuto();
 }
@@ -641,10 +651,7 @@ function renderCertificatesContent(content) {
 
     cards.forEach(card => track.appendChild(card));
 
-    track.classList.toggle(
-        "is-carousel",
-        cards.length > CERTIFICATES_PER_VIEW
-    );
+    track.classList.toggle("is-carousel", cards.length > 1);
 
     setupCertificatesCarousel(track, cards);
 }

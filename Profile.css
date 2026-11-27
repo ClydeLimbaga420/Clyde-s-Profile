@@ -1920,10 +1920,9 @@ body.season-summer .image-glow {
     position: relative;
 }
 
-.certificate-next {
+.certificate-nav {
     position: absolute;
     top: 50%;
-    right: -12px;
     z-index: 2;
     width: 44px;
     height: 44px;
@@ -1943,13 +1942,21 @@ body.season-summer .image-glow {
         color 0.2s ease;
 }
 
-.certificate-next:hover {
+.certificate-prev {
+    left: -12px;
+}
+
+.certificate-next {
+    right: -12px;
+}
+
+.certificate-nav:hover {
     transform: translateY(calc(-50% - 2px));
     border-color: var(--accent);
     color: var(--accent);
 }
 
-.certificate-next:focus-visible {
+.certificate-nav:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
 }
@@ -2007,50 +2014,43 @@ body.season-summer .image-glow {
     flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
-    padding-top: 6px;
-    padding-bottom: 14px;
+    overflow-y: hidden;
+    gap: 0;
+    padding: 6px 0 14px;
     scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent) var(--surface-soft);
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.certificates-grid.is-carousel::-webkit-scrollbar {
+    display: none;
 }
 
 .certificates-grid.is-carousel > img,
 .certificates-grid.is-carousel > .certificate-link {
-    flex-basis: calc((100% - 80px) / 5);
+    flex: 0 0 100%;
+    max-width: 100%;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
-.certificates-grid::-webkit-scrollbar {
-    height: 8px;
-}
-
-.certificates-grid::-webkit-scrollbar-track {
-    background: var(--surface-soft);
-    border-radius: 8px;
-}
-
-.certificates-grid::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 8px;
-}
-
-@media (max-width: 900px) {
-    .certificates-grid.is-carousel > img,
-    .certificates-grid.is-carousel > .certificate-link {
-        flex-basis: calc((100% - 40px) / 3);
-    }
+.certificates-grid.is-carousel > img {
+    width: 100%;
+    max-height: 520px;
+    object-fit: contain;
 }
 
 @media (max-width: 700px) {
-    .certificates-grid.is-carousel > img,
-    .certificates-grid.is-carousel > .certificate-link {
-        flex-basis: calc((100% - 20px) / 2);
+    .certificate-nav {
+        width: 38px;
+        height: 38px;
     }
-}
 
-@media (max-width: 400px) {
-    .certificates-grid.is-carousel > img,
-    .certificates-grid.is-carousel > .certificate-link {
-        flex-basis: 100%;
+    .certificate-prev {
+        left: -6px;
+    }
+
+    .certificate-next {
+        right: -6px;
     }
 }
